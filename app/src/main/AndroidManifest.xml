@@ -12,10 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+ re
+            android:name=".register"
+=======
             android:name=".Test"
             android:exported="false" />
         <activity
             android:name=".Login"
+ main
             android:exported="false" />
         <activity
             android:name=".MainActivity"
