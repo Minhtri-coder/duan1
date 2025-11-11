@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                             // Đăng nhập thành công
                             Log.d(TAG, "signInWithEmail:success");
                             Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-
+                            startActivity(new Intent(LoginActivity.this,MainActivity.class));
                         } else {
                             // Đăng nhập thất bại
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
