@@ -5,15 +5,89 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
-    <TextView
+    android:orientation="vertical"
+    tools:context=".LoginActivity">
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dang nhap"
-        android:layout_marginLeft="140dp"
-        android:layout_marginTop="60dp"
-        android:textSize="30dp"
-        android:textColor="#1A9E88"
-        />
+        android:layout_gravity="center"
+        android:src="@drawable/chair1" />
 
+    <TextView
+        android:id="@+id/txtDangNhap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Đăng nhập"
+        android:textStyle="bold"
+        android:textColor="#000000"
+        android:textSize="30dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+
+        <!-- Username -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tài khoản"
+            android:textSize="16sp"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/edtUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@android:drawable/edit_text"
+            android:padding="10dp" />
+
+        <!-- Password -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mật khẩu"
+            android:textSize="16sp"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/edtPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:background="@android:drawable/edit_text"
+            android:padding="10dp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Login Button -->
+
+        <!-- Đăng ký Button -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:textColor="#ffff"
+            android:backgroundTint="@null"
+            android:text="Đăng nhập" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đăng ký"
+            android:background="@drawable/rounded_button"
+            android:textColor="#fff"
+            android:backgroundTint="@null"
+            android:layout_marginTop="32dp" />
+
+
+    </LinearLayout>
 </LinearLayout>
