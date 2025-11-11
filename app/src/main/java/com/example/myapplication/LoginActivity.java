@@ -71,7 +71,6 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
             // Nếu đã đăng nhập, chuyển hướng đến màn hình chính ngay lập tức
-            navigateToMainScreen();
         }
     }
 
@@ -94,7 +93,6 @@ public class LoginActivity extends AppCompatActivity {
                             // Đăng nhập thành công
                             Log.d(TAG, "signInWithEmail:success");
                             Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-                            navigateToMainScreen();
 
                         } else {
                             // Đăng nhập thất bại
@@ -107,12 +105,5 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    // Phương thức chuyển hướng đến màn hình chính
-    private void navigateToMainScreen() {
-        // THAY THẾ MainActivity.class bằng Activity màn hình chính của bạn
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Xóa hết Activity trước đó
-        startActivity(intent);
-        finish();
-    }
+
 }
