@@ -15,7 +15,6 @@
 
         <!-- ✅ Màn hình chính (MainActivity) -->
         <activity
-       RegisterActivity
             android:name=".MainActivity"
             android:exported="true" />
 
@@ -25,16 +24,12 @@
             android:exported="true" />
 
         <!-- ✅ Màn hình Đăng nhập (điểm khởi đầu app) -->
-
+            <activity
             android:name=".hoanthanhgit"
             android:exported="false" />
         <activity
             android:name=".register"
             android:exported="true" />
-        <activity
-            android:name=".Login"
-            android:exported="false" />
-     main
         <activity
             android:name=".LoginActivity"
             android:exported="true">
