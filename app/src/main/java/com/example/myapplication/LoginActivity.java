@@ -21,8 +21,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private static final String TAG = "LoginActivity";
-
     // Khai báo các View từ layout
     private EditText edtUsername, edtPassword; // edtUsername sẽ nhận Email
     private Button btnLogin, btnSignUp;
@@ -91,12 +89,10 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Đăng nhập thành công
-                            Log.d(TAG, "signInWithEmail:success");
                             Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(LoginActivity.this,MainActivity.class));
                         } else {
                             // Đăng nhập thất bại
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this,
                                     "Đăng nhập thất bại. Vui lòng kiểm tra Email/Mật khẩu.",
                                     Toast.LENGTH_LONG).show();
