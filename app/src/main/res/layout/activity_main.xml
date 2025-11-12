@@ -16,22 +16,29 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#48BFF6"
+            android:background="#1A9E88"
             android:theme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="Nội thất THN"
-            app:titleTextColor="@color/white" />
+            app:titleMarginStart="140dp"
+            app:titleTextColor="@color/white" >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_logo"
+                android:layout_gravity="center"
+                />
+        </androidx.appcompat.widget.Toolbar>
 
         <!-- Nơi chứa nội dung (fragment) -->
         <FrameLayout
             android:id="@+id/framecontent"
             android:layout_below="@id/toolbar"
-
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>
 
         <!-- Thanh Curved Bottom Navigation -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_gravity="bottom"

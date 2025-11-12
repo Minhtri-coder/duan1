@@ -9,16 +9,16 @@
         android:icon="@drawable/ic_home"/>
 
     <item
-        android:id="@+id/shorts"
+        android:id="@+id/product"
         android:title="Sản phẩm"
         android:icon="@drawable/ic_product"
         />
     <item
-        android:id="@+id/subscriptions"
+        android:id="@+id/love"
         android:title="Yêu thích "
         android:icon="@drawable/ic_heart" />
     <item
-        android:id="@+id/library"
+        android:id="@+id/person"
         android:title="Cá nhân"
         android:icon="@drawable/ic_person" />
 
