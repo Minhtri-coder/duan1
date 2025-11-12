@@ -61,6 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void attemptRegistration() {
         final String tenTaiKhoan = edtTaiKhoan.getText().toString().trim();
+        final String matkhau = edtMatKhau.getText().toString().trim();
         final String email = edtEmail.getText().toString().trim();
         final String sdt = edtSDT.getText().toString().trim();
         String matKhau = edtMatKhau.getText().toString().trim();
@@ -84,7 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
                         Log.d(TAG, "Đăng ký Firebase Auth thành công: " + user.getEmail());
 
                         // Tiếp tục lưu thông tin lên Firestore
-                        saveUserDataToFirestore(user, tenTaiKhoan, sdt);
+                        saveUserDataToFirestore(user, tenTaiKhoan,matkhau, sdt);
                     } else {
                         Exception e = task.getException();
                         Log.e(TAG, "Đăng ký Firebase Auth thất bại: ", e);
@@ -95,7 +96,7 @@ public class RegisterActivity extends AppCompatActivity {
                 });
     }
 
-    private void saveUserDataToFirestore(FirebaseUser user, String tenTaiKhoan, String sdt) {
+    private void saveUserDataToFirestore(FirebaseUser user, String tenTaiKhoan,String matkhau, String sdt) {
         if (user == null) {
             Toast.makeText(this, "Lỗi: Không tìm thấy người dùng sau khi đăng ký.", Toast.LENGTH_LONG).show();
             return;
@@ -103,10 +104,12 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Chuẩn bị dữ liệu lưu Firestore
         Map<String, Object> userData = new HashMap<>();
-        userData.put("ten_tai_khoan", tenTaiKhoan);
+        userData.put("name", tenTaiKhoan);
         userData.put("email", user.getEmail());
-        userData.put("so_dien_thoai", sdt);
-        userData.put("ngay_tham_gia", Timestamp.now());
+        userData.put("pass", matkhau);
+        userData.put("phone", sdt);
+        userData.put("role", "user");
+        userData.put("day join", Timestamp.now());
 
         // Ghi vào Firestore
         db.collection("users").document(user.getUid())
