@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_product"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_margin="8dp"
+    android:backgroundTint="@null">
+
+    <ImageView
+        android:id="@+id/imgProduct"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/chair"/>
+
+    <TextView
+        android:id="@+id/txtProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ghế ngồi"
+        android:textSize="16dp"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/btnProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Xem"
+        android:backgroundTint="#4AA785"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="8dp"/>
+
+
+
+
+
+</LinearLayout>

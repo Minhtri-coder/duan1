@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+
 import com.example.myapplication.Fragment.Home_Fragment;
 import com.example.myapplication.R;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -18,7 +20,6 @@ import com.example.myapplication.Fragment.Love_fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-
     BottomNavigationView bon;
 
     @SuppressLint("MissingInflatedId")
@@ -26,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         bon = findViewById(R.id.bottomNavigation);
         bon.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
