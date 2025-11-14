@@ -18,7 +18,7 @@
             android:name=".Admin"
             android:exported="false" />
         <activity
-            android:name=".welcome"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,7 +27,7 @@
             </intent-filter>
         </activity> <!-- ✅ Màn hình chính (MainActivity) -->
         <activity
-            android:name=".MainActivity"
+            android:name=".welcome"
             android:exported="true" /> <!-- ✅ Màn hình Đăng ký -->
         <activity
             android:name=".RegisterActivity"

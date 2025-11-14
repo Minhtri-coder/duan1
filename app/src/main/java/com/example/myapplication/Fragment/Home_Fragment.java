@@ -3,64 +3,73 @@ package com.example.myapplication.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.myapplication.Adapter.CategoryAdapter;
+import com.example.myapplication.Adapter.ProductAdapter;
+import com.example.myapplication.DAO.ProductDao;
+import com.example.myapplication.Model.Product;
+import com.example.myapplication.Model.item_category;
 import com.example.myapplication.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Home_Fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
+import kotlinx.coroutines.FlowPreview;
+
 public class Home_Fragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public Home_Fragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Home_Fragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Home_Fragment newInstance(String param1, String param2) {
-        Home_Fragment fragment = new Home_Fragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    RecyclerView recCategory, recProduct;
+    ArrayList<item_category> ListCate;
+    private ArrayList<Product> listProduct;
+    private ProductDao productDao;
+    private ProductAdapter productAdapter;
+    CategoryAdapter categoryAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_, container, false);
+        View view = inflater.inflate(R.layout.fragment_home_, container, false);
+        recCategory = view.findViewById(R.id.recCategory);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 5);
+        recCategory.setLayoutManager(gridLayoutManager);
+        ListCate = new ArrayList<>();
+        ListCate.add(new item_category(R.drawable.ic_sofa, "sofa"));
+        ListCate.add(new item_category(R.drawable.ic_chair, "Ghế"));
+        ListCate.add(new item_category(R.drawable.ic_bed, "Giường"));
+        ListCate.add(new item_category(R.drawable.ic_table, "Bàn"));
+        ListCate.add(new item_category(R.drawable.ic_lamp, "Đèn"));
+        categoryAdapter = new CategoryAdapter(requireContext(), ListCate);
+        recCategory.setAdapter(categoryAdapter);
+        // product
+        View view2 = inflater.inflate(R.layout.fragment_product_, container, false);
+        recProduct = view.findViewById(R.id.recProduct);
+        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getContext(), 2);
+        recProduct.setLayoutManager(gridLayoutManager2);
+        listProduct = new ArrayList<>();
+        productAdapter = new ProductAdapter(getContext(), listProduct);
+        recProduct.setAdapter(productAdapter);
+        productDao = new ProductDao();
+        loadProducts();
+        return view;
+    }
+
+    private void loadProducts() {
+        productDao.getAllproduct(products -> {
+            listProduct.clear();
+            listProduct.addAll(products);
+            productAdapter.notifyDataSetChanged();
+        });
     }
 }
