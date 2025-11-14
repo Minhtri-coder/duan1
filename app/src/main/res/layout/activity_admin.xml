@@ -42,9 +42,9 @@
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNavigation_admin"
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="80sp"
                 android:layout_gravity="bottom"
-                android:layout_margin="5dp"
+                android:layout_margin="5sp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/khung_boc"
                 app:menu="@menu/bottom_menu_admin"
@@ -52,15 +52,6 @@
         </LinearLayout>
 
         <!-- Floating Action Button nằm chính giữa chỗ lõm -->
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_add"
-            app:tint="@android:color/white"
-            app:backgroundTint="#1A9E88"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_marginBottom="15dp" />
     </FrameLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
