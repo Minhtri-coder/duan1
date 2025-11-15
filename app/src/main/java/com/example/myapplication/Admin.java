@@ -34,11 +34,12 @@ public class Admin extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment = new Home_Fragment();
                 int id=item.getItemId();
-                if(id==R.id.home){
+                if(id==R.id.category){
 
                     fragment = new Home_Fragment();
-                }
-                else if (id== R.id.product_statistics) {
+                } else if (id== R.id.product) {
+                    fragment = new Product_Fragment();
+                } else if (id== R.id.product_statistics) {
 
                     fragment= new Product_statistics_Fragment();
 

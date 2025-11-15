@@ -4,28 +4,27 @@
     tools:showIn="navigation_view">
 
     <item
-        android:id="@+id/home"
-        android:title="Trang chủ"
-        android:icon="@drawable/ic_home"/>
-
+        android:id="@+id/category"
+        android:title=""
+        android:icon="@drawable/ic_category"/>
+    <item
+        android:id="@+id/product"
+        android:title=""
+        android:icon="@drawable/ic_product"/>
     <item
         android:id="@+id/product_statistics"
-        android:title="Thống kê "
+        android:title=""
         android:icon="@drawable/ic_product_statistics"
         />
     <item
-        android:id="@+id/khongco"
-        android:title=""
-        />
-    <item
         android:id="@+id/user_statistics"
-        android:title="Thống kê "
+        android:title=""
         android:icon="@drawable/ic_customer_statistics"
         />
 
     <item
         android:id="@+id/person"
-        android:title="Cá nhân"
+        android:title=""
         android:icon="@drawable/ic_person" />
 
 

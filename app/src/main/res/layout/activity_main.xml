@@ -5,6 +5,7 @@
     android:id="@+id/drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="false"
     tools:context=".MainActivity">
 
     <!-- Nội dung chính -->
@@ -12,21 +13,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#1A9E88"
-            android:theme="@style/ThemeOverlay.AppCompat.Light"
-            app:titleMarginStart="140dp"
-            app:titleTextColor="@color/white" >
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_logo"
-                android:layout_gravity="center"
-                />
-        </androidx.appcompat.widget.Toolbar>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="#1A9E88"
+                android:paddingTop="0dp"
+                android:fitsSystemWindows="true"
+                app:titleTextColor="@color/white">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_logo" />
+            </androidx.appcompat.widget.Toolbar>
+
 
         <!-- Nơi chứa nội dung (fragment) -->
         <FrameLayout
@@ -40,7 +42,7 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:layout_gravity="bottom"
             android:layout_margin="5dp"
             android:layout_marginBottom="5dp"
