@@ -1,4 +1,4 @@
-package com.example.myapplication.Fragment;
+package com.example.myapplication.Fragment.Admin;
 
 import android.os.Bundle;
 
@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.myapplication.R;
 
-public class Custom_statistics_Fragment extends Fragment {
+public class Product_statistics_Fragment extends Fragment {
 
 
     @Override
@@ -23,6 +23,6 @@ public class Custom_statistics_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_custom_statistics_, container, false);
+        return inflater.inflate(R.layout.fragment_product_statistics_, container, false);
     }
 }
