@@ -45,13 +45,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewhold
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
         Product product = listProduct.get(position);
         holder.txtProduct.setText(product.getProductName());
+
         Glide.with(context)
                 .load(product.getProductImage())
-                .centerCrop()
                 .placeholder(R.drawable.bench)
-             .into(holder.imgProduct);
-
-
+                .error(R.drawable.bench)
+                .into(holder.imgProduct);
         holder.btnProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
