@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         setContentView(R.layout.activity_main);
         framecontent= findViewById(R.id.framecontent);
         replaceFragment(new Home_Fragment());

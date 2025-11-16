@@ -41,7 +41,7 @@ public class Admin extends AppCompatActivity {
                 }
                 else if(id == R.id.user_statistics){
 
-                    fragment= new Custom_statistics_Fragment();
+                    fragment= new productAdminTestFragment();
                 }
                 else{
 

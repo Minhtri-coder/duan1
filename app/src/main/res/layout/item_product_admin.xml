@@ -25,15 +25,23 @@
         android:layout_marginTop="8dp"/>
 
     <Button
-        android:id="@+id/btnProduct"
+        android:id="@+id/btnChinhsua"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Xem"
+        android:text="Chỉnh sửa"
         android:backgroundTint="#4AA785"
         android:textColor="#FFFFFF"
         android:layout_marginTop="8dp"/>
 
-
+    <Button
+        android:id="@+id/btnXoa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Xoá"
+        android:backgroundTint="@color/red"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="8dp"
+        />
 
 
 
