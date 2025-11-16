@@ -2,23 +2,18 @@ package com.example.myapplication;
 
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.myapplication.Fragment.Custom_statistics_Fragment;
+import com.example.myapplication.Fragment.Admin.Custom_statistics_Fragment;
 import com.example.myapplication.Fragment.Home_Fragment;
-import com.example.myapplication.Fragment.Love_fragment;
 import com.example.myapplication.Fragment.Person_Fragment;
 import com.example.myapplication.Fragment.Product_Fragment;
-import com.example.myapplication.Fragment.Product_statistics_Fragment;
+import com.example.myapplication.Fragment.Admin.Product_statistics_Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Admin extends AppCompatActivity {
