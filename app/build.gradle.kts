@@ -1,7 +1,6 @@
 plugins {
     id("com.google.gms.google-services")
     alias(libs.plugins.android.application)
-
 }
 
 android {
@@ -15,7 +14,6 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -53,4 +51,10 @@ dependencies {
     
     implementation(platform("com.google.firebase:firebase-bom:34.5.0"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.firebase:firebase-firestore")
+    implementation("com.github.bumptech.glide:glide:5.0.5")
+    implementation("com.google.firebase:firebase-storage:20.3.0")
+    implementation("androidx.core:core-ktx:1.12.0")
+    implementation("androidx.appcompat:appcompat:1.6.1")
 }

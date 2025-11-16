@@ -12,16 +12,19 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 // Không cần Firestore nữa, nên có thể xóa import dưới
 // import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
-
-    private static final String TAG = "LoginActivity";
 
     // Khai báo các View từ layout
     private EditText edtUsername, edtPassword; // edtUsername sẽ nhận Email
@@ -30,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     // Khai báo Firebase Instances
     private FirebaseAuth mAuth;
     // Không cần Firestore để đăng nhập bằng Email
-    // private FirebaseFirestore db;
+     private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // 1. Khởi tạo Firebase
         mAuth = FirebaseAuth.getInstance();
-        // db = FirebaseFirestore.getInstance(); // KHÔNG CẦN THIẾT NỮA
+         db = FirebaseFirestore.getInstance(); // KHÔNG CẦN THIẾT NỮA
 
         // 2. Tham chiếu Views
         edtUsername = findViewById(R.id.edtUsername); // Sẽ dùng để nhập Email
@@ -86,20 +89,29 @@ public class LoginActivity extends AppCompatActivity {
 
         // Bắt đầu quá trình đăng nhập Firebase Auth (KHÔNG CẦN TÌM KIẾM FIRESTORE)
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Đăng nhập thành công
-                            Log.d(TAG, "signInWithEmail:success");
-                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-
-                        } else {
-                            // Đăng nhập thất bại
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this,
-                                    "Đăng nhập thất bại. Vui lòng kiểm tra Email/Mật khẩu.",
-                                    Toast.LENGTH_LONG).show();
+                            assert mAuth.getCurrentUser() != null;
+                            db.collection("users").whereEqualTo("email", email).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                @Override
+                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                    DocumentSnapshot document = queryDocumentSnapshots.getDocuments().get(0);
+                                    String role = document.getString("role");
+                                    if ("admin".equalsIgnoreCase(role)){
+                                        Toast.makeText(LoginActivity.this, "Vào trang Admin", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(LoginActivity.this,Admin.class));
+                                    }else{
+                                        Toast.makeText(LoginActivity.this, "Vào trang user", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                                    }
+                                    finish();
+                                }
+                            });
+                        }
+                        else {
+                            Toast.makeText(LoginActivity.this, "Đăng nhập không thành công", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

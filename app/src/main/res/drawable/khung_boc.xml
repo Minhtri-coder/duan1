@@ -1,0 +1,20 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!-- Nền chuyển màu -->
+    <gradient
+        android:startColor="#F0F0F0"
+        android:endColor="#F0EFEF"
+        android:angle="270"/>
+
+    <!-- Bo góc -->
+    <corners android:topLeftRadius="20dp"
+        android:topRightRadius="20dp"
+        android:bottomLeftRadius="20dp"
+        android:bottomRightRadius="20dp"/>
+
+    <!-- Đổ bóng (API 21+) -->
+    <padding android:top="8dp"/>
+
+    <!-- Viền -->
+    <stroke android:width="1dp" android:color="#444444"/>
+</shape>
