@@ -22,6 +22,7 @@ import com.example.myapplication.Fragment.Love_fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
+
     Toolbar toolbar;
     BottomNavigationView bon;
     FrameLayout framecontent;
@@ -29,9 +30,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setContentView(R.layout.activity_main);
+        getSupportActionBar().setDisplayShowTitleEnabled(false); // Ẩn title
         framecontent= findViewById(R.id.framecontent);
         replaceFragment(new Home_Fragment());
         bon = findViewById(R.id.bottomNavigation);
@@ -71,5 +73,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.framecontent, fragment);
         transaction.commit();
+
     }
+
 }
