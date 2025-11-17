@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.myapplication.Adapter.CategoryAdapter;
 import com.example.myapplication.Adapter.ProductAdapter;
@@ -16,6 +17,8 @@ import com.example.myapplication.DAO.ProductDao;
 import com.example.myapplication.Model.Product;
 import com.example.myapplication.Model.item_category;
 import com.example.myapplication.R;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -45,12 +48,15 @@ public class Home_Fragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 5);
         recCategory.setLayoutManager(gridLayoutManager);
         ListCate = new ArrayList<>();
-        ListCate.add(new item_category(R.drawable.ic_sofa, "sofa"));
+        ListCate.add(new item_category(R.drawable.ic_sofa, "Sofa"));
         ListCate.add(new item_category(R.drawable.ic_chair, "Ghế"));
         ListCate.add(new item_category(R.drawable.ic_bed, "Giường"));
         ListCate.add(new item_category(R.drawable.ic_table, "Bàn"));
         ListCate.add(new item_category(R.drawable.ic_lamp, "Đèn"));
         categoryAdapter = new CategoryAdapter(requireContext(), ListCate);
+        categoryAdapter = new CategoryAdapter(ListCate, requireContext(), categoryName -> {
+                    filterCategoryFromFirebase(categoryName);
+                });
         recCategory.setAdapter(categoryAdapter);
         // product
         View view2 = inflater.inflate(R.layout.fragment_product_, container, false);
@@ -72,4 +78,30 @@ public class Home_Fragment extends Fragment {
             productAdapter.notifyDataSetChanged();
         });
     }
+    // loc san pham theo item
+    private void filterCategoryFromFirebase(String categoryName) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("products")
+                .whereGreaterThanOrEqualTo("productName", categoryName)
+                .whereLessThanOrEqualTo("productName", categoryName + "\uf8ff")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+
+                    listProduct.clear(); // danh sách sản phẩm hiển thị
+
+                    for (DocumentSnapshot doc : queryDocumentSnapshots) {
+                        Product p = doc.toObject(Product.class);
+                        listProduct.add(p);
+                    }
+
+                    productAdapter.notifyDataSetChanged();
+
+                    Toast.makeText(getContext(), "Đã lọc theo: " + categoryName, Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                });
+    }
+
 }

@@ -6,7 +6,6 @@
     tools:context=".LoginActivity"
     android:padding="16dp"
     android:gravity="center">
-
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -86,7 +85,6 @@
             android:textColor="#fff"
             android:backgroundTint="@null"
             android:layout_marginTop="32dp" />
-
 
     </LinearLayout>
 </LinearLayout>
