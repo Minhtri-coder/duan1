@@ -16,10 +16,10 @@
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="?attr/actionBarSize"
                 android:background="#1A9E88"
-                android:paddingTop="0dp"
-                android:fitsSystemWindows="true"
+                android:theme="@style/ThemeOverlay.AppCompat.Light"
+                app:titleMarginStart="140dp"
                 app:titleTextColor="@color/white">
 
                 <ImageView
@@ -42,11 +42,12 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="80sp"
             android:layout_gravity="bottom"
-            android:layout_margin="5dp"
-            android:layout_marginBottom="5dp"
+            android:layout_margin="5sp"
+            android:layout_marginBottom="10dp"
             app:menu="@menu/bottom_menu"
+            android:elevation="8dp"
             android:background="@drawable/khung_boc"
             />
     </LinearLayout>
