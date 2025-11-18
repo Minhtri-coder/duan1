@@ -22,15 +22,17 @@
             android:exported="false" />
         <activity
             android:name=".welcome"
-            android:exported="false" />
-        <activity
-            android:name=".Admin"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Admin"
+            android:exported="true">
+
         </activity> <!-- ✅ Màn hình chính (MainActivity) -->
         <activity
             android:name=".MainActivity"
