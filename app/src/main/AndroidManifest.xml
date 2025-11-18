@@ -21,10 +21,10 @@
             android:name=".ViewAccountActivity"
             android:exported="false" />
         <activity
-            android:name=".Admin"
+            android:name=".welcome"
             android:exported="false" />
         <activity
-            android:name=".welcome"
+            android:name=".Admin"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
