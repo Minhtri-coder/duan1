@@ -1,5 +1,6 @@
 package com.example.myapplication.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -45,10 +46,25 @@ public class Product_Fragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
         recProduct.setLayoutManager(gridLayoutManager);
         listProduct = new ArrayList<>();
-        productAdapter = new ProductAdapter(getContext(),listProduct);
+        productAdapter = new ProductAdapter(getContext(), listProduct, new ProductAdapter.OnProductClickListener() {
+            @Override
+            public void onclickProduct(Product product) {
+                Fragment OrderFragment = new OderDetails_Fragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("id",product.getProductId());
+                OrderFragment.setArguments(bundle);
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.framecontent,OrderFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
         recProduct.setAdapter(productAdapter);
         productDao = new ProductDao();
         loadProducts();
+
+
         return view;
     }
 
