@@ -2,6 +2,7 @@ package com.example.myapplication.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.myapplication.Fragment.OderDetails_Fragment;
 import com.example.myapplication.Model.Product;
 import com.example.myapplication.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -27,10 +29,20 @@ import java.util.ArrayList;
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewholder>{
     private ArrayList<Product>listProduct;
     private Context context;
+    public OnProductClickListener onProductClickListener;
+    public interface OnProductClickListener{
+        void onclickProduct(Product product);
+    }
+//    public ProductAdapter( Context context,ArrayList<Product> listProduct,OnProductClickListener) {
+//        this.listProduct = listProduct;
+//        this.context = context;
+//    }
 
-    public ProductAdapter( Context context,ArrayList<Product> listProduct) {
+
+    public ProductAdapter( Context context,ArrayList<Product> listProduct, OnProductClickListener onProductClickListener) {
         this.listProduct = listProduct;
         this.context = context;
+        this.onProductClickListener = onProductClickListener;
     }
 
     @NonNull
@@ -54,7 +66,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewhold
         holder.btnProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                onProductClickListener.onclickProduct(product);
             }
         });
     }

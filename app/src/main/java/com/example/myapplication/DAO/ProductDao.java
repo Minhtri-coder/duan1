@@ -1,8 +1,15 @@
 package com.example.myapplication.DAO;
 
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+
+import com.example.myapplication.Adapter.ProductAdapter;
 import com.example.myapplication.Model.Product;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -47,5 +54,27 @@ public class ProductDao {
     }
     public void DeleteProduct(String productID){
         db.collection("products").document(productID).delete();
+    }
+
+    public void getProduct(String id,OnProductLoadedListener productLoadedListener){
+       db.collection("products").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+           @Override
+           public void onSuccess(DocumentSnapshot documentSnapshot) {
+            Product product = documentSnapshot.toObject(Product.class);
+            if (product != null){
+                productLoadedListener.onloaded(product);
+            }
+           }
+       }).addOnFailureListener(new OnFailureListener() {
+           @Override
+           public void onFailure(@NonNull Exception e) {
+            productLoadedListener.onError(e);
+           }
+       });
+    }
+
+    public interface OnProductLoadedListener{
+        void onloaded(Product product);
+        void onError(Exception e);
     }
 }

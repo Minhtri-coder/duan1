@@ -38,15 +38,16 @@ public class Admin extends AppCompatActivity {
                 if(id==R.id.category){
                     fragment= new Admin_home_fragment();
                 } else if (id== R.id.product) {
-                    fragment = new Product_Admin_fragment();
+                    fragment= new productAdminTestFragment();
+               ;
                 } else if (id== R.id.product_statistics) {
 
                     fragment= new Product_statistics_Fragment();
 
                 }
                 else if(id == R.id.user_statistics){
+                    fragment = new Product_Admin_fragment();
 
-                    fragment= new productAdminTestFragment();
                 }
                 else{
 

@@ -64,7 +64,20 @@ public class Home_Fragment extends Fragment {
         GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getContext(), 2);
         recProduct.setLayoutManager(gridLayoutManager2);
         listProduct = new ArrayList<>();
-        productAdapter = new ProductAdapter(getContext(), listProduct);
+        productAdapter = new ProductAdapter(getContext(), listProduct, new ProductAdapter.OnProductClickListener() {
+            @Override
+            public void onclickProduct(Product product) {
+                Fragment OrderFragment = new OderDetails_Fragment();
+                Bundle bundleHome = new Bundle();
+                bundleHome.putString("idHome",product.getProductId());
+                OrderFragment.setArguments(bundleHome);
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.framecontent,OrderFragment)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
         recProduct.setAdapter(productAdapter);
         productDao = new ProductDao();
         loadProducts();
