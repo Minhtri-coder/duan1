@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@drawable/chair1" />
+        android:src="@drawable/tableab"/>
 
     <TextView
         android:id="@+id/txtDangNhap"
@@ -72,9 +72,8 @@
             android:id="@+id/btnLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_button"
+            android:background="@drawable/border_button"
             android:textColor="#ffff"
-            android:backgroundTint="@null"
             android:text="Đăng nhập" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -82,7 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Đăng ký"
-            android:background="@drawable/rounded_button"
+            android:background="@drawable/border_button"
             android:textColor="#fff"
             android:backgroundTint="@null"
             android:layout_marginTop="32dp" />

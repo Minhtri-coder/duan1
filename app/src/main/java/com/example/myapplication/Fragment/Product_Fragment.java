@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.myapplication.Adapter.ProductAdapter;
-import com.example.myapplication.Adapter.ProductAdapter_home;
 import com.example.myapplication.DAO.ProductDao;
 import com.example.myapplication.Model.Product;
 import com.example.myapplication.R;
@@ -42,7 +41,7 @@ public class Product_Fragment extends Fragment {
         productAdapter = new ProductAdapter(getContext(), listProduct, new ProductAdapter.OnProductClickListener() {
             @Override
             public void onclickProduct(Product product) {
-                Fragment OrderFragment = new OderDetails_Fragment();
+                Fragment OrderFragment = new ProductDetails_Fragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("id",product.getProductId());
                 OrderFragment.setArguments(bundle);
