@@ -10,16 +10,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.myapplication.Fragment.Admin.Admin_home_fragment;
-import com.example.myapplication.Fragment.Admin.Custom_statistics_Fragment;
-import com.example.myapplication.Fragment.Admin.Product_Admin_fragment;
-import com.example.myapplication.Fragment.Home_Fragment;
 import com.example.myapplication.Fragment.Person_Fragment;
-import com.example.myapplication.Fragment.Product_Fragment;
-import com.example.myapplication.Fragment.Admin.Product_statistics_Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Admin extends AppCompatActivity {
+import com.example.myapplication.Admin.Admin_home_fragment;
+import com.example.myapplication.Admin.Product_Admin_fragment;
+import com.example.myapplication.Admin.Product_statistics_Fragment;
+
+public class AdminMain extends AppCompatActivity {
     FrameLayout framecontent;
     BottomNavigationView btnadmin;
     @Override

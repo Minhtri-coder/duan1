@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Admin"
+            android:name=".AdminMain"
             android:exported="true">
 
         </activity> <!-- ✅ Màn hình chính (MainActivity) -->
