@@ -13,13 +13,12 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.myapplication.DAO.ProductDao;
-import com.example.myapplication.MainActivity;
 import com.example.myapplication.Model.Product;
 import com.example.myapplication.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
-public class OderDetails_Fragment extends Fragment {
+public class ProductDetails_Fragment extends Fragment {
     ImageView img;
     TextView txtName,txtDec,txtPrice;
     ProductDao productDao;
@@ -31,7 +30,6 @@ public class OderDetails_Fragment extends Fragment {
         txtName = view.findViewById(R.id.txtNameOrderDetail);
         txtDec = view.findViewById(R.id.txtDescriptionOrderDetail);
         txtPrice = view.findViewById(R.id.txtPriceOrderDetail);
-        Button button = view.findViewById(R.id.btnOrder);
         productDao = new ProductDao();
 
         Bundle bundle = getArguments();

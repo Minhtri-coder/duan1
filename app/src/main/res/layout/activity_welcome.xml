@@ -54,9 +54,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="get start"
-                android:background="@drawable/rounded_button"
+                android:background="@drawable/border_button"
                 android:textColor="#fff"
-                android:backgroundTint="@null"
                 android:layout_alignParentBottom="true"
                 android:layout_margin="20dp"
                 />

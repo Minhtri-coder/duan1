@@ -65,7 +65,7 @@ public class Home_Fragment extends Fragment {
         productAdapter = new ProductAdapter_home(getContext(), listProduct, new ProductAdapter_home.OnProductClickListener() {
             @Override
             public void onclickProduct(Product product) {
-                Fragment OrderFragment = new OderDetails_Fragment();
+                Fragment OrderFragment = new ProductDetails_Fragment();
                 Bundle bundleHome = new Bundle();
                 bundleHome.putString("idHome",product.getProductId());
                 OrderFragment.setArguments(bundleHome);
