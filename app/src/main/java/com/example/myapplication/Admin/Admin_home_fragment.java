@@ -1,4 +1,4 @@
-package com.example.myapplication.Fragment.Admin;
+package com.example.myapplication.Admin;
 
 import android.os.Bundle;
 
@@ -10,18 +10,18 @@ import android.view.ViewGroup;
 
 import com.example.myapplication.R;
 
-public class Product_Admin_fragment extends Fragment {
-
+public class Admin_home_fragment extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product__admin_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_amin_home_fragment, container, false);
     }
 }

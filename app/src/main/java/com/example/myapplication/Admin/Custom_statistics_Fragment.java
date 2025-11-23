@@ -1,4 +1,4 @@
-package com.example.myapplication.Fragment.Admin;
+package com.example.myapplication.Admin;
 
 import android.os.Bundle;
 
