@@ -1,10 +1,7 @@
 package com.example.myapplication.DAO;
 
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 
-import com.example.myapplication.Adapter.ProductAdapter;
 import com.example.myapplication.Model.Product;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

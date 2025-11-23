@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragment.ProductDetails_Fragment"
+    android:orientation="vertical"
+    android:background="#F7FCFB">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/imgProductOrderDetail"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bench"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/txtNameOrderDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Skov Lænestol Lounge Chair"
+            android:textSize="28sp"
+            android:fontFamily="serif"
+            android:textStyle="normal"
+            android:textColor="@color/black"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintTop_toBottomOf="@id/imgProductOrderDetail" />
+
+        <TextView
+            android:id="@+id/productBrand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lounge Chairs by Norse Interiors"
+            android:textSize="14sp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintTop_toBottomOf="@id/txtNameOrderDetail" />
+
+        <TextView
+            android:id="@+id/txtPriceOrderDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="$899.00"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintTop_toBottomOf="@id/productBrand" />
+
+        <TextView
+            android:id="@+id/txtDescriptionOrderDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Embodying the essence of Scandinavian design, the Skov Lænestol chair combines minimalist aesthetics with unparalleled comfort. Crafted from sustainably sourced oak and upholstered with premium linen, it's a timeless piece for any modern living space."
+            android:textSize="16sp"
+            android:lineSpacingExtra="4dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintTop_toBottomOf="@id/txtPriceOrderDetail" />
+
+        <TextView
+            android:id="@+id/colorLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Color"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintTop_toBottomOf="@id/txtDescriptionOrderDetail"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <LinearLayout
+            android:id="@+id/colorOptionsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintTop_toBottomOf="@id/colorLabel">
+
+            <View android:layout_width="32dp" android:layout_height="32dp" android:background="@drawable/color_swatch_beige" android:layout_marginEnd="8dp"/>
+            <View android:layout_width="32dp" android:layout_height="32dp" android:background="@drawable/color_swatch_white" android:layout_marginEnd="8dp"/>
+            <View android:layout_width="32dp" android:layout_height="32dp" android:background="@drawable/color_swatch_dark" android:layout_marginEnd="8dp"/>
+            <View android:layout_width="32dp" android:layout_height="32dp" android:background="@drawable/color_swatch_green" android:layout_marginEnd="8dp"/>
+
+        </LinearLayout>
+
+       <androidx.constraintlayout.widget.ConstraintLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           app:layout_constraintTop_toBottomOf="@id/colorOptionsLayout"
+           android:padding="20dp">
+           <LinearLayout
+               android:id="@+id/quantityControl"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal"
+               android:gravity="center_vertical"
+               android:layout_marginTop="40dp"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintStart_toStartOf="parent"
+               >
+
+               <TextView
+                   android:id="@+id/qtyMinus"
+                   android:layout_width="40dp"
+                   android:layout_height="40dp"
+                   android:text="—"
+                   android:textSize="18sp"
+                   android:gravity="center"
+                   android:textColor="@color/black"
+                   android:clickable="true"
+                   android:focusable="true" />
+
+               <TextView
+                   android:id="@+id/qtyDisplay"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="1"
+                   android:textSize="18sp"
+                   android:textStyle="bold"
+                   android:paddingStart="12dp"
+                   android:paddingEnd="12dp"
+                   android:textColor="@color/black" />
+
+               <TextView
+                   android:id="@+id/qtyPlus"
+                   android:layout_width="40dp"
+                   android:layout_height="40dp"
+                   android:text="+"
+                   android:textSize="18sp"
+                   android:gravity="center"
+                   android:textColor="@color/black"
+                   android:clickable="true"
+                   android:focusable="true" />
+           </LinearLayout>
+
+           <Button
+               android:id="@+id/addToCartButton"
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:text="ADD TO CART"
+               android:backgroundTint="#D8C2B5"
+               android:textColor="@color/white"
+               android:paddingTop="16dp"
+               android:paddingBottom="16dp"
+               android:layout_marginStart="16dp"
+               app:layout_constraintStart_toEndOf="@id/quantityControl"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintBottom_toBottomOf="parent"/>
+       </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

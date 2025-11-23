@@ -5,7 +5,8 @@
     android:id="@+id/drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin">
+    tools:context=".Admin"
+    android:background="@color/white">
 
     <FrameLayout
         android:layout_width="match_parent"

@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.myapplication.Adapter.CategoryAdapter;
-import com.example.myapplication.Adapter.ProductAdapter;
+import com.example.myapplication.Adapter.ProductAdapter_home;
 import com.example.myapplication.DAO.ProductDao;
 import com.example.myapplication.Model.Product;
 import com.example.myapplication.Model.item_category;
@@ -22,14 +22,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
-import kotlinx.coroutines.FlowPreview;
-
 public class Home_Fragment extends Fragment {
     RecyclerView recCategory, recProduct;
     ArrayList<item_category> ListCate;
     private ArrayList<Product> listProduct;
     private ProductDao productDao;
-    private ProductAdapter productAdapter;
+    private ProductAdapter_home productAdapter;
     CategoryAdapter categoryAdapter;
 
     @Override
@@ -64,10 +62,10 @@ public class Home_Fragment extends Fragment {
         GridLayoutManager gridLayoutManager2 = new GridLayoutManager(getContext(), 2);
         recProduct.setLayoutManager(gridLayoutManager2);
         listProduct = new ArrayList<>();
-        productAdapter = new ProductAdapter(getContext(), listProduct, new ProductAdapter.OnProductClickListener() {
+        productAdapter = new ProductAdapter_home(getContext(), listProduct, new ProductAdapter_home.OnProductClickListener() {
             @Override
             public void onclickProduct(Product product) {
-                Fragment OrderFragment = new OderDetails_Fragment();
+                Fragment OrderFragment = new ProductDetails_Fragment();
                 Bundle bundleHome = new Bundle();
                 bundleHome.putString("idHome",product.getProductId());
                 OrderFragment.setArguments(bundleHome);
