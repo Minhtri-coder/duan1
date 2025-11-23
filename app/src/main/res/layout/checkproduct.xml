@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:background="@drawable/border_product"
+android:orientation="vertical"
+android:gravity="center"
+android:layout_margin="5dp"
+android:backgroundTint="@null"
+android:padding="3dp">
+
+<ImageView
+
+    android:layout_width="170dp"
+    android:layout_height="170dp"
+    android:scaleType="centerCrop"
+    android:src="@drawable/chair"
+    android:layout_margin="3dp"/>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+</RelativeLayout>
+<TextView
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="12dp"
+    android:text="Product Name"
+    android:textSize="18sp"
+    android:textColor="#111111"
+    android:paddingHorizontal="16dp"
+    android:fontFamily="sans-serif-medium"/>
+
+<TextView
+
+
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="$499"
+    android:textSize="18sp"
+    android:textColor="#111"
+    android:layout_marginTop="8dp"/>
+
+
+
+</LinearLayout>

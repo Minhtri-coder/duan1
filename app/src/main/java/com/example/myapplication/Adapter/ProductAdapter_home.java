@@ -18,7 +18,7 @@ import com.example.myapplication.R;
 
 import java.util.ArrayList;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewholder>{
+public class ProductAdapter_home extends RecyclerView.Adapter<ProductAdapter_home.viewholder>{
     private ArrayList<Product>listProduct;
     private Context context;
     public OnProductClickListener onProductClickListener;
@@ -30,7 +30,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewhold
 //        this.context = context;
 //    }
 
-    public ProductAdapter(Context context, ArrayList<Product> listProduct, OnProductClickListener onProductClickListener) {
+
+    public ProductAdapter_home(Context context, ArrayList<Product> listProduct, OnProductClickListener onProductClickListener) {
         this.listProduct = listProduct;
         this.context = context;
         this.onProductClickListener = onProductClickListener;
@@ -40,7 +41,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewhold
     @Override
     public viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-        View view = inflater.inflate(R.layout.item_product,parent,false);
+        View view = inflater.inflate(R.layout.item_product_main,parent,false);
         return new viewholder(view);
     }
 

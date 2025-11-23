@@ -57,14 +57,6 @@
                 android:textSize="18sp"
                 android:textColor="#111"
                 android:layout_marginEnd="10dp"/>
-
-            <ImageView
-                android:id="@+id/imgAddCart"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:padding="8dp"
-                android:src="@drawable/shoppingcart"
-                android:background="@drawable/border_cart"/>
         </LinearLayout>
 
     </LinearLayout>

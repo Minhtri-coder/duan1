@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_margin="8dp"
-    android:backgroundTint="@null">
+    android:backgroundTint="@null"
+    >
 
     <ImageView
         android:id="@+id/imgProduct"
@@ -19,10 +20,12 @@
         android:id="@+id/txtProduct"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ghế ngồi"
-        android:gravity="center"
-        android:textSize="16dp"
-        android:layout_marginTop="8dp"/>
+        android:paddingTop="12dp"
+        android:text="Product Name"
+        android:textSize="18sp"
+        android:textColor="#111111"
+        android:paddingHorizontal="16dp"
+        android:fontFamily="sans-serif-medium"/>
 
     <Button
         android:id="@+id/btnChinhsua"

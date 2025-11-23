@@ -5,7 +5,8 @@
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/white"
-    tools:context=".RegisterActivity">
+    tools:context=".RegisterActivity"
+    >
 
     <LinearLayout
         android:id="@+id/main"
