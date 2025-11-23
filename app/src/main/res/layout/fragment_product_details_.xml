@@ -5,8 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".Fragment.OderDetails_Fragment"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@color/white">
+    android:background="#F7FCFB">
+
+
 
     <ImageView
         android:id="@+id/imgProductOrderDetail"
@@ -15,16 +16,20 @@
         android:src="@drawable/bench"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tên sản phẩm"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
-        android:textColor="@color/black"/>
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:padding="20dp"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+        <!-- Tên sản phẩm + giá -->
 
     <TextView
         android:id="@+id/txtNameOrderDetail"
@@ -32,18 +37,15 @@
         android:layout_height="wrap_content"
         android:text="Ghế sofa màu nâu da bò"
         android:layout_marginTop="8dp"
-        android:textSize="18dp"
+        android:textSize="25sp"
+        android:textStyle="bold"
         android:textColor="@color/black"/>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#000"
-        android:layout_marginVertical="12dp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Mô Tả"
-        android:textSize="20dp"
+        android:textSize="16dp"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
         android:textColor="@color/black"/>
@@ -57,16 +59,43 @@
         android:textSize="18dp"
         android:textColor="@color/black"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#000"
-        android:layout_marginVertical="16dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kích thước"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ghế sofa là món đồ nội thất dùng để ngồi hoặc nằm thư giãn, thường được đặt trong phòng khách, phòng chờ hoặc văn phòng. "
+                android:layout_marginTop="8dp"
+                android:textSize="18dp"
+                android:textColor="@color/black"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                android:layout_marginTop="10dp"/>
+        </LinearLayout>
+    </ScrollView>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp">
+        android:padding="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginEnd="20dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -92,5 +121,6 @@
         android:textColor="#FFFFFF"
         android:textSize="18dp"
         android:layout_marginTop="8dp"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:layout_margin="20dp"/>
 </LinearLayout>
