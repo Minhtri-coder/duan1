@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.myapplication.R;
 
-public class Love_fragment extends Fragment {
+public class Cart_fragment extends Fragment {
 
 
     @Override
@@ -23,6 +23,6 @@ public class Love_fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_love_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_cart_fragment, container, false);
     }
 }

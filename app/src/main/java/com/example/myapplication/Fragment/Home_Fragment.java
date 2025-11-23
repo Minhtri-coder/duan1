@@ -46,11 +46,11 @@ public class Home_Fragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 5);
         recCategory.setLayoutManager(gridLayoutManager);
         ListCate = new ArrayList<>();
-        ListCate.add(new item_category(R.drawable.ic_sofa, "Sofa"));
-        ListCate.add(new item_category(R.drawable.ic_chair, "Ghế"));
-        ListCate.add(new item_category(R.drawable.ic_bed, "Giường"));
-        ListCate.add(new item_category(R.drawable.ic_table, "Bàn"));
-        ListCate.add(new item_category(R.drawable.ic_lamp, "Đèn"));
+        ListCate.add(new item_category( "Sofa"));
+        ListCate.add(new item_category( "Ghế"));
+        ListCate.add(new item_category("Giường"));
+        ListCate.add(new item_category("Bàn"));
+        ListCate.add(new item_category("Đèn"));
         categoryAdapter = new CategoryAdapter(requireContext(), ListCate);
         categoryAdapter = new CategoryAdapter(ListCate, requireContext(), categoryName -> {
                     filterCategoryFromFirebase(categoryName);

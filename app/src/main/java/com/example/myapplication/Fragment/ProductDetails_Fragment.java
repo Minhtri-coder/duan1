@@ -15,7 +15,6 @@ import com.bumptech.glide.Glide;
 import com.example.myapplication.DAO.ProductDao;
 import com.example.myapplication.Model.Product;
 import com.example.myapplication.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class ProductDetails_Fragment extends Fragment {
@@ -25,11 +24,12 @@ public class ProductDetails_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_product_details_, container, false);
+        View view = inflater.inflate(R.layout.fragment_oder_details_, container, false);
         img = view.findViewById(R.id.imgProductOrderDetail);
         txtName = view.findViewById(R.id.txtNameOrderDetail);
         txtDec = view.findViewById(R.id.txtDescriptionOrderDetail);
         txtPrice = view.findViewById(R.id.txtPriceOrderDetail);
+        Button button = view.findViewById(R.id.btnOrder);
         productDao = new ProductDao();
 
         Bundle bundle = getArguments();
@@ -67,17 +67,7 @@ public class ProductDetails_Fragment extends Fragment {
         });
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottomNavigation);
-        bottomNavigationView.setVisibility(View.GONE);
-    }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottomNavigation);
-        bottomNavigationView.setVisibility(View.VISIBLE);
-    }
+
+
 }

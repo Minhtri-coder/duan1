@@ -50,11 +50,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewho
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
         item_category product = listCategory.get(position);
         holder.txtcate.setText(product.getName());
-        Glide.with(context)
-                .load(product.getImg())
-                .centerCrop()
-                .placeholder(R.drawable.bench)
-                .into(holder.imgcate);
         // set on click
         int posion = holder.getAdapterPosition();
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -74,11 +69,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewho
     }
 
     public class viewholder extends RecyclerView.ViewHolder {
-        ImageView imgcate;
         TextView txtcate;
         public viewholder(@NonNull View itemView) {
             super(itemView);
-            imgcate = itemView.findViewById(R.id.img_cate);
             txtcate= itemView.findViewById(R.id.txtcate);
         }
     }
