@@ -5,21 +5,21 @@
 
     <item
         android:id="@+id/home"
-        android:title="Trang chủ"
+        android:title=""
         android:icon="@drawable/ic_home"/>
 
     <item
         android:id="@+id/product"
-        android:title="Sản phẩm"
+        android:title=""
         android:icon="@drawable/ic_product"
         />
     <item
         android:id="@+id/love"
-        android:title="Yêu thích "
-        android:icon="@drawable/ic_heart" />
+        android:title=" "
+        android:icon="@drawable/ic_cart2" />
     <item
         android:id="@+id/person"
-        android:title="Cá nhân"
+        android:title=""
         android:icon="@drawable/ic_person" />
 
 

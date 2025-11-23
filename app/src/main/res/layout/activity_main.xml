@@ -6,51 +6,80 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="false"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
-    <!-- Nội dung chính -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="#1A9E88"
-                android:theme="@style/ThemeOverlay.AppCompat.Light"
-                app:titleMarginStart="140dp"
-                app:titleTextColor="@color/white">
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_logo" />
-            </androidx.appcompat.widget.Toolbar>
+        <!-- Toolbar -->
+        <androidx.appcompat.widget.Toolbar
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white"
+            android:elevation="4dp"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_logo"
+                android:layout_gravity="center"
+                />
+            <!-- Menu icon -->
+            <ImageButton
+                android:id="@+id/btn_menu"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_menu"
+                android:contentDescription="Menu"
+                android:layout_gravity="start"/>
+            <!-- Cart icon -->
+            <ImageButton
+                android:id="@+id/btn_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_cart"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Cart"
+                android:layout_gravity="end"
+                android:layout_marginStart="10dp"
+                android:layout_marginRight="10dp"/>
+            <!--Search icon -->
+            <ImageButton
+                android:id="@+id/btn_search"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_search"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="Search"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="end"/>
+        </androidx.appcompat.widget.Toolbar>
 
+        <!-- Fragment content -->
 
-        <!-- Nơi chứa nội dung (fragment) -->
+        <!-- Bottom Navigation -->
         <FrameLayout
             android:id="@+id/framecontent"
-            android:layout_below="@id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:background="@color/white"
+            android:layout_weight="1" />
 
-        <!-- Thanh Curved Bottom Navigation -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigation"
             android:layout_width="match_parent"
-            android:layout_height="80sp"
-            android:layout_gravity="bottom"
-            android:layout_margin="5sp"
-            android:layout_marginBottom="10dp"
+            android:layout_height="70dp"
+            android:layout_margin="8dp"
+            android:layout_marginBottom="12dp"
+            android:background="@color/white"
             app:menu="@menu/bottom_menu"
-            android:elevation="8dp"
-            android:background="@drawable/khung_boc"
-            />
+            android:elevation="10dp"/>
     </LinearLayout>
-
 
 </androidx.drawerlayout.widget.DrawerLayout>

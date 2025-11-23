@@ -8,17 +8,16 @@ import android.widget.Toast;
 
 
 import com.example.myapplication.Fragment.Home_Fragment;
-import com.example.myapplication.R;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.WindowCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.Fragment.Product_Fragment;
 import com.example.myapplication.Fragment.Person_Fragment;
-import com.example.myapplication.Fragment.Love_fragment;
+import com.example.myapplication.Fragment.Cart_fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -57,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else{
                         Toast.makeText(MainActivity.this, "Yeu thich", Toast.LENGTH_SHORT).show();
-                        fragment= new Love_fragment();
+                        fragment= new Cart_fragment();
                     }
                 // Nếu fragment được chọn thì hiển thị nó
                 if (fragment != null) {
