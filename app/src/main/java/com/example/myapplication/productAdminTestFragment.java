@@ -75,7 +75,7 @@ public class productAdminTestFragment extends Fragment {
                 String price = edtPrice.getText().toString();
                 String image = edtImage.getText().toString();
                 String dec = edtDec.getText().toString();
-                Product product = new Product(name,price,image,dec);
+                Product product = new Product(name,Integer.parseInt(price),image,dec);
                 productDao.Addproduct(product);
                 loadproduct();
                 dialog.dismiss();

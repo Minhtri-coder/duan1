@@ -81,7 +81,7 @@ public class ProductAdapterAdmin extends RecyclerView.Adapter<ProductAdapterAdmi
                         String price = edtPrice.getText().toString();
                         String image = edtImage.getText().toString();
                         String dec = edtDec.getText().toString();
-                        Product product1 = new Product(name,price,image,dec);
+                        Product product1 = new Product(name,Integer.parseInt(price),image,dec);
                         productDao = new ProductDao();
                         productDao.UpdateProduct(id,product1);
                         loadProduct2();
