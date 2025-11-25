@@ -3,18 +3,14 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.Timestamp;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -24,24 +20,25 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private static final String TAG = "RegisterActivity";
-
     private EditText edtTaiKhoan, edtEmail, edtSDT, edtMatKhau;
-    private Button btnDangKy, btnTroVe;
+    private MaterialButton btnDangKy;
+    private TextView btnTroVe;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+
+    private static final String TAG = "RegisterActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // 1. Khởi tạo Firebase
+        // Firebase
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        // 2. Ánh xạ View
+        // Ánh xạ
         edtTaiKhoan = findViewById(R.id.edtTaiKhoan);
         edtEmail = findViewById(R.id.edtEmail);
         edtSDT = findViewById(R.id.edtSDT);
@@ -49,10 +46,10 @@ public class RegisterActivity extends AppCompatActivity {
         btnDangKy = findViewById(R.id.btnDangKy);
         btnTroVe = findViewById(R.id.btnTroVe);
 
-        // 3. Sự kiện nút Đăng ký
+        // Đăng ký
         btnDangKy.setOnClickListener(v -> attemptRegistration());
 
-        // 4. Sự kiện nút Trở về
+        // Trở về Login
         btnTroVe.setOnClickListener(v -> {
             startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
             finish();
@@ -60,75 +57,57 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void attemptRegistration() {
-        final String tenTaiKhoan = edtTaiKhoan.getText().toString().trim();
-        final String matkhau = edtMatKhau.getText().toString().trim();
-        final String email = edtEmail.getText().toString().trim();
-        final String sdt = edtSDT.getText().toString().trim();
+
+        // Lấy dữ liệu người dùng nhập
+        String taiKhoan = edtTaiKhoan.getText().toString().trim();
+        String email = edtEmail.getText().toString().trim();
+        String sdt = edtSDT.getText().toString().trim();
         String matKhau = edtMatKhau.getText().toString().trim();
 
-        // Kiểm tra nhập liệu
-        if (email.isEmpty() || matKhau.isEmpty() || tenTaiKhoan.isEmpty() || sdt.isEmpty()) {
-            Toast.makeText(this, "Vui lòng điền đầy đủ thông tin.", Toast.LENGTH_SHORT).show();
+        // Kiểm tra
+        if (taiKhoan.isEmpty() || email.isEmpty() || sdt.isEmpty() || matKhau.isEmpty()) {
+            Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        if (matKhau.length() < 3) {
-            Toast.makeText(this, "Mật khẩu phải có ít nhất 6 ký tự.", Toast.LENGTH_SHORT).show();
+        if (matKhau.length() < 6) {
+            Toast.makeText(this, "Mật khẩu phải từ 6 ký tự trở lên", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Tạo tài khoản Firebase Authentication
+        // Tạo tài khoản Firebase Auth
         mAuth.createUserWithEmailAndPassword(email, matKhau)
-                .addOnCompleteListener(this, task -> {
+                .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        Log.d(TAG, "Đăng ký Firebase Auth thành công: " + user.getEmail());
 
-                        // Tiếp tục lưu thông tin lên Firestore
-                        saveUserDataToFirestore(user, tenTaiKhoan,matkhau, sdt);
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        saveUserToFirestore(user, taiKhoan, sdt, matKhau);
+
                     } else {
-                        Exception e = task.getException();
-                        Log.e(TAG, "Đăng ký Firebase Auth thất bại: ", e);
-                        Toast.makeText(RegisterActivity.this,
-                                "Đăng ký Firebase thất bại: " + (e != null ? e.getMessage() : "Không rõ nguyên nhân."),
-                                Toast.LENGTH_LONG).show();
+                        Toast.makeText(this, "Đăng ký thất bại", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
-    private void saveUserDataToFirestore(FirebaseUser user, String tenTaiKhoan,String matkhau, String sdt) {
-        if (user == null) {
-            Toast.makeText(this, "Lỗi: Không tìm thấy người dùng sau khi đăng ký.", Toast.LENGTH_LONG).show();
-            return;
-        }
+    private void saveUserToFirestore(FirebaseUser user, String taiKhoan, String sdt, String pass) {
+        if (user == null) return;
 
-        // Chuẩn bị dữ liệu lưu Firestore
-        Map<String, Object> userData = new HashMap<>();
-        userData.put("name", tenTaiKhoan);
-        userData.put("email", user.getEmail());
-        userData.put("pass", matkhau);
-        userData.put("phone", sdt);
-        userData.put("role", "user");
-        userData.put("day join", Timestamp.now());
+        Map<String, Object> data = new HashMap<>();
+        data.put("name", taiKhoan);
+        data.put("email", user.getEmail());
+        data.put("phone", sdt);
+        data.put("pass", pass);
+        data.put("role", "user");
+        data.put("day_join", Timestamp.now());
 
-        // Ghi vào Firestore
         db.collection("users").document(user.getUid())
-                .set(userData)
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        Log.d(TAG, "Lưu thông tin Firestore thành công.");
-                        Toast.makeText(RegisterActivity.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-
-                        // Chuyển sang LoginActivity
-                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                        finish();
-                    } else {
-                        Exception e = task.getException();
-                        Log.e(TAG, "Lỗi khi lưu Firestore: ", e);
-                        Toast.makeText(RegisterActivity.this,
-                                "Đăng ký thành công nhưng lưu thông tin thất bại: " + (e != null ? e.getMessage() : "Không rõ nguyên nhân."),
-                                Toast.LENGTH_LONG).show();
-                    }
-                });
+                .set(data)
+                .addOnSuccessListener(unused -> {
+                    Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                    finish();
+                })
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Lỗi lưu dữ liệu!", Toast.LENGTH_SHORT).show());
     }
 }

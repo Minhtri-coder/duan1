@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -56,8 +57,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                     else{
                         Toast.makeText(MainActivity.this, "Yeu thich", Toast.LENGTH_SHORT).show();
-                        fragment= new Cart_fragment();
+                      Intent  cart= new Intent(MainActivity.this,CartActivity.class);
+                        startActivity(cart);
                     }
+
                 // Nếu fragment được chọn thì hiển thị nó
                 if (fragment != null) {
                     replaceFragment(fragment);
