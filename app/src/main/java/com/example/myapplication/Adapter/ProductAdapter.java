@@ -16,6 +16,8 @@ import com.bumptech.glide.Glide;
 import com.example.myapplication.Model.Product;
 import com.example.myapplication.R;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewholder>{
@@ -60,7 +62,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewhold
 //
 //            }
 //        });
-        holder.txtPrice.setText(product.getPrice());
+        NumberFormat numberFormat = new DecimalFormat("#,###");
+        String gia = numberFormat.format(product.getPrice());
+//        holder.txtPrice.setText(gia + "VNĐ");
+        gia = gia.replace(",", ".");
+        holder.txtPrice.setText(gia);
+
         holder.imgProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
