@@ -22,25 +22,21 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewholder> {
-
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewholder>{
     private ArrayList<Product> listProduct;
     private Context context;
-    private OnProductClickListener onProductClickListener;
-    private CartManager cartManager;   // ✅ QUẢN LÝ GIỎ HÀNG
-
+    private ProductAdapter.OnProductClickListener onProductClickListener;
+    private CartManager cartManager;
     // ✅ Interface click xem chi tiết
     public interface OnProductClickListener {
         void onclickProduct(Product product);
     }
-
-    public ProductAdapter(Context context, ArrayList<Product> listProduct, OnProductClickListener onProductClickListener) {
+    public ProductAdapter(Context context, ArrayList<Product> listProduct, ProductAdapter.OnProductClickListener onProductClickListener) {
         this.listProduct = listProduct;
         this.context = context;
         this.onProductClickListener = onProductClickListener;
         this.cartManager = new CartManager(context);
     }
-
     @NonNull
     @Override
     public viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -59,7 +55,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewhold
         // ✅ FORMAT GIÁ (int → đẹp)
         NumberFormat numberFormat = new DecimalFormat("#,###");
         String gia = numberFormat.format(product.getPrice()).replace(",", ".");
-        holder.txtPrice.setText(gia + " VNĐ");
+        holder.txtPrice.setText(gia);
 
         // ✅ LOAD ẢNH
         Glide.with(context)
@@ -67,45 +63,27 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewhold
                 .placeholder(R.drawable.bench)
                 .error(R.drawable.bench)
                 .into(holder.imgProduct);
-          CartDone
-
-        // ✅ CLICK XEM CHI TIẾT
-        holder.imgProduct.setOnClickListener(v -> {
-            if (onProductClickListener != null) {
-
-//        holder.btnProduct.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
-        NumberFormat numberFormat = new DecimalFormat("#,###");
-        String gia = numberFormat.format(product.getPrice());
-//        holder.txtPrice.setText(gia + "VNĐ");
-        gia = gia.replace(",", ".");
-        holder.txtPrice.setText(gia);
 
         holder.imgProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              main
                 onProductClickListener.onclickProduct(product);
             }
         });
+        holder.btnAddcart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CartItem item = new CartItem(
+                        product.getProductName(),
+                        product.getPrice(),   // ✅ GIỜ LÀ int — ĐÚNG
+                        1,
+                        product.getProductImage()
+                );
 
-        // ✅ ADD TO CART
-        holder.btnAddcart.setOnClickListener(v -> {
+                cartManager.addToCart(item);
 
-            CartItem item = new CartItem(
-                    product.getProductName(),
-                    product.getPrice(),   // ✅ GIỜ LÀ int — ĐÚNG
-                    1,
-                    product.getProductImage()
-            );
-
-            cartManager.addToCart(item);
-
-            Toast.makeText(context, "Đã thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Đã thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
@@ -114,15 +92,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewhold
         return listProduct.size();
     }
 
-    // ================= VIEW HOLDER =================
     public class viewholder extends RecyclerView.ViewHolder {
-
         ImageView imgProduct, btnAddcart;
         TextView txtProduct, txtPrice;
-
         public viewholder(@NonNull View itemView) {
             super(itemView);
-
             imgProduct = itemView.findViewById(R.id.imgProduct);
             txtProduct = itemView.findViewById(R.id.txtProduct);
             txtPrice = itemView.findViewById(R.id.txtprice);
