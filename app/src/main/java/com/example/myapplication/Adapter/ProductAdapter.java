@@ -67,10 +67,28 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewhold
                 .placeholder(R.drawable.bench)
                 .error(R.drawable.bench)
                 .into(holder.imgProduct);
+          CartDone
 
         // ✅ CLICK XEM CHI TIẾT
         holder.imgProduct.setOnClickListener(v -> {
             if (onProductClickListener != null) {
+
+//        holder.btnProduct.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+        NumberFormat numberFormat = new DecimalFormat("#,###");
+        String gia = numberFormat.format(product.getPrice());
+//        holder.txtPrice.setText(gia + "VNĐ");
+        gia = gia.replace(",", ".");
+        holder.txtPrice.setText(gia);
+
+        holder.imgProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              main
                 onProductClickListener.onclickProduct(product);
             }
         });
