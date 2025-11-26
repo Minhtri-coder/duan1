@@ -15,6 +15,9 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+            android:name=".CartActivity"
+            android:exported="false" />
+        <activity
             android:name=".UpdateAccountActivity"
             android:exported="false" />
         <activity
@@ -22,7 +25,7 @@
             android:exported="false" />
         <activity
             android:name=".welcome"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,15 +34,10 @@
         </activity>
         <activity
             android:name=".AdminMain"
-            android:exported="true">
-
-        </activity> <!-- ✅ Màn hình chính (MainActivity) -->
+            android:exported="true"></activity> <!-- ✅ Màn hình chính (MainActivity) -->
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
-
-        </activity> <!-- ✅ Màn hình Đăng ký -->
-
+            android:exported="true"></activity> <!-- ✅ Màn hình Đăng ký -->
         <activity
             android:name=".RegisterActivity"
             android:exported="true" />
