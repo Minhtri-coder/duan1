@@ -16,6 +16,9 @@ import com.example.myapplication.R;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
+import android.widget.ImageView;
+import com.bumptech.glide.Glide;
+
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
@@ -44,7 +47,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     public void onBindViewHolder(@NonNull CartHolder h, int position) {
         CartItem item = list.get(position);
 
-        // ⭐ Format tiền Việt Nam
+        // ✅ TIỀN
         NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
         String formattedPrice = formatter.format(item.getPrice()) + " ₫";
 
@@ -52,12 +55,21 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
         h.txtPrice.setText(formattedPrice);
         h.txtQuantity.setText(String.valueOf(item.getQuantity()));
 
+        // ✅ LOAD ẢNH
+        Glide.with(context)
+                .load(item.getImage())
+                .placeholder(R.drawable.ic_launcher_foreground)
+                .error(R.drawable.ic_launcher_foreground)
+                .into(h.imgProduct);
+
+        // ✅ TĂNG
         h.btnPlus.setOnClickListener(v -> {
             item.setQuantity(item.getQuantity() + 1);
             notifyItemChanged(position);
             listener.onQuantityChanged();
         });
 
+        // ✅ GIẢM
         h.btnMinus.setOnClickListener(v -> {
             if (item.getQuantity() > 1) {
                 item.setQuantity(item.getQuantity() - 1);
@@ -66,6 +78,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
             }
         });
 
+        // ✅ XOÁ
         h.btnDelete.setOnClickListener(v -> {
             list.remove(position);
             notifyItemRemoved(position);
@@ -81,6 +94,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     public static class CartHolder extends RecyclerView.ViewHolder {
         TextView txtName, txtPrice, txtQuantity;
         ImageButton btnPlus, btnMinus, btnDelete;
+        ImageView imgProduct;   // ✅ ẢNH
 
         public CartHolder(@NonNull View v) {
             super(v);
@@ -92,6 +106,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
             btnPlus = v.findViewById(R.id.btnPlus);
             btnMinus = v.findViewById(R.id.btnMinus);
             btnDelete = v.findViewById(R.id.btnDelete);
+
+            imgProduct = v.findViewById(R.id.imgProduct); // ✅ ÁNH XẠ ẢNH
         }
     }
 }
