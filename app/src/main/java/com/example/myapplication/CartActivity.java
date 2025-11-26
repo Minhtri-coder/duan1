@@ -1,7 +1,9 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,8 @@ public class CartActivity extends AppCompatActivity {
 
     RecyclerView rcvCart;
     TextView txtSubtotal;
+    ImageView btnBack;   // ✅ NÚT QUAY VỀ
+
     ArrayList<CartItem> cartList;
     CartAdapter adapter;
 
@@ -33,8 +37,10 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
+        // ✅ Ánh xạ
         rcvCart = findViewById(R.id.rcvCart);
         txtSubtotal = findViewById(R.id.txtSubtotal);
+        btnBack = findViewById(R.id.btnBack);   // ✅ NÚT BACK
 
         pref = getSharedPreferences("CART_DATA", MODE_PRIVATE);
 
@@ -49,8 +55,16 @@ public class CartActivity extends AppCompatActivity {
         rcvCart.setAdapter(adapter);
 
         updateSubtotal();
+
+        // ✅ SỰ KIỆN QUAY VỀ HOME
+        btnBack.setOnClickListener(v -> {
+            Intent intent = new Intent(CartActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish(); // ✅ đóng CartActivity
+        });
     }
 
+    // ================= LOAD GIỎ HÀNG =================
     private void loadCart() {
         String json = pref.getString("cart", null);
         Type type = new TypeToken<ArrayList<CartItem>>() {}.getType();
@@ -62,20 +76,20 @@ public class CartActivity extends AppCompatActivity {
         }
     }
 
+    // ================= LƯU GIỎ HÀNG =================
     private void saveCart() {
         SharedPreferences.Editor editor = pref.edit();
         editor.putString("cart", gson.toJson(cartList));
         editor.apply();
     }
 
-    // ⭐⭐⭐ Format tiền VNĐ và tính tổng
+    // ================= TÍNH TỔNG TIỀN =================
     private void updateSubtotal() {
         double total = 0;
         for (CartItem i : cartList) {
             total += i.getPrice() * i.getQuantity();
         }
 
-        // ⭐ Format theo kiểu tiền Việt Nam
         NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
         txtSubtotal.setText(formatter.format(total) + " ₫");
     }
