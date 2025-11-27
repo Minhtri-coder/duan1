@@ -53,6 +53,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
         h.txtName.setText(item.getName());
         h.txtPrice.setText(formattedPrice);
         h.txtQuantity.setText(String.valueOf(item.getQuantity()));
+        Glide.with(context)
+                .load(item.getImage())
+                .placeholder(R.drawable.bench)
+                .error(R.drawable.bench)
+                .into(h.imgProduct);
 
         // ✅ LOAD ẢNH SẢN PHẨM (FIX LỖI KHÔNG HIỂN THỊ ẢNH)
         Glide.with(context)
@@ -98,7 +103,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
         TextView txtName, txtPrice, txtQuantity;
         ImageButton btnPlus, btnMinus, btnDelete;
+ 
         ImageView imgProduct; // ✅ ẢNH SẢN PHẨM
+
+        ImageView imgProduct;
+
 
         public CartHolder(@NonNull View v) {
             super(v);
@@ -106,6 +115,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
             txtName = v.findViewById(R.id.txtName);
             txtPrice = v.findViewById(R.id.txtPrice);
             txtQuantity = v.findViewById(R.id.txtQuantity);
+            imgProduct = v.findViewById(R.id.imgProduct);
 
             btnPlus = v.findViewById(R.id.btnPlus);
             btnMinus = v.findViewById(R.id.btnMinus);
