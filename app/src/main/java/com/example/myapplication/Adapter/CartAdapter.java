@@ -5,11 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.myapplication.Model.CartItem;
 import com.example.myapplication.R;
 
@@ -51,6 +53,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
         h.txtName.setText(item.getName());
         h.txtPrice.setText(formattedPrice);
         h.txtQuantity.setText(String.valueOf(item.getQuantity()));
+        Glide.with(context)
+                .load(item.getImage())
+                .placeholder(R.drawable.bench)
+                .error(R.drawable.bench)
+                .into(h.imgProduct);
 
         h.btnPlus.setOnClickListener(v -> {
             item.setQuantity(item.getQuantity() + 1);
@@ -81,6 +88,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     public static class CartHolder extends RecyclerView.ViewHolder {
         TextView txtName, txtPrice, txtQuantity;
         ImageButton btnPlus, btnMinus, btnDelete;
+        ImageView imgProduct;
 
         public CartHolder(@NonNull View v) {
             super(v);
@@ -88,6 +96,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
             txtName = v.findViewById(R.id.txtName);
             txtPrice = v.findViewById(R.id.txtPrice);
             txtQuantity = v.findViewById(R.id.txtQuantity);
+            imgProduct = v.findViewById(R.id.imgProduct);
 
             btnPlus = v.findViewById(R.id.btnPlus);
             btnMinus = v.findViewById(R.id.btnMinus);

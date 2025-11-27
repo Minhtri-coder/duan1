@@ -16,6 +16,9 @@ import com.example.myapplication.DAO.ProductDao;
 import com.example.myapplication.Model.Product;
 import com.example.myapplication.R;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+
 
 public class ProductDetails_Fragment extends Fragment {
     ImageView img;
@@ -58,7 +61,10 @@ public class ProductDetails_Fragment extends Fragment {
                         .into(img);
                 txtName.setText(product.getProductName());
                 txtDec.setText(product.getProductDescription());
-                txtPrice.setText(product.getPrice());
+                NumberFormat numberFormat = new DecimalFormat("#,###");
+                String price = numberFormat.format(product.getPrice());
+                price = price.replace(",",".");
+                txtPrice.setText(price);
             }
             @Override
             public void onError(Exception e) {
