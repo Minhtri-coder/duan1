@@ -11,6 +11,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class CartManager {
+
     private static final String CART_PREF = "CART_DATA";
     private SharedPreferences pref;
     private Gson gson;
@@ -23,7 +24,6 @@ public class CartManager {
     public void addToCart(CartItem item) {
         ArrayList<CartItem> list = getCart();
 
-        // nếu sản phẩm đã có → tăng số lượng
         for (CartItem c : list) {
             if (c.getName().equals(item.getName())) {
                 c.setQuantity(c.getQuantity() + 1);
@@ -32,7 +32,6 @@ public class CartManager {
             }
         }
 
-        // nếu chưa có → add mới
         list.add(item);
         saveCart(list);
     }
@@ -47,5 +46,14 @@ public class CartManager {
 
     public void saveCart(ArrayList<CartItem> list) {
         pref.edit().putString("cart", gson.toJson(list)).apply();
+    }
+
+    // ✅ TỔNG SỐ LƯỢNG ĐỂ HIỂN THỊ BADGE
+    public int getTotalQuantity() {
+        int total = 0;
+        for (CartItem item : getCart()) {
+            total += item.getQuantity();
+        }
+        return total;
     }
 }
