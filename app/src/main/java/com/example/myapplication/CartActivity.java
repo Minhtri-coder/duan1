@@ -24,7 +24,7 @@ public class CartActivity extends AppCompatActivity {
 
     RecyclerView rcvCart;
     TextView txtSubtotal;
-    ImageView btnBack;   // ✅ NÚT QUAY VỀ
+    ImageView btnBack;
 
     ArrayList<CartItem> cartList;
     CartAdapter adapter;
@@ -37,10 +37,9 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
-        // ✅ Ánh xạ
         rcvCart = findViewById(R.id.rcvCart);
         txtSubtotal = findViewById(R.id.txtSubtotal);
-        btnBack = findViewById(R.id.btnBack);   // ✅ NÚT BACK
+        btnBack = findViewById(R.id.btnBack);
 
         pref = getSharedPreferences("CART_DATA", MODE_PRIVATE);
 
@@ -53,37 +52,27 @@ public class CartActivity extends AppCompatActivity {
 
         rcvCart.setLayoutManager(new LinearLayoutManager(this));
         rcvCart.setAdapter(adapter);
-
         updateSubtotal();
 
-        // ✅ SỰ KIỆN QUAY VỀ HOME
+        // ✅ BACK VỀ HOME
         btnBack.setOnClickListener(v -> {
-            Intent intent = new Intent(CartActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish(); // ✅ đóng CartActivity
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
         });
     }
 
-    // ================= LOAD GIỎ HÀNG =================
     private void loadCart() {
         String json = pref.getString("cart", null);
         Type type = new TypeToken<ArrayList<CartItem>>() {}.getType();
 
-        if (json == null) {
-            cartList = new ArrayList<>();
-        } else {
-            cartList = gson.fromJson(json, type);
-        }
+        if (json == null) cartList = new ArrayList<>();
+        else cartList = gson.fromJson(json, type);
     }
 
-    // ================= LƯU GIỎ HÀNG =================
     private void saveCart() {
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putString("cart", gson.toJson(cartList));
-        editor.apply();
+        pref.edit().putString("cart", gson.toJson(cartList)).apply();
     }
 
-    // ================= TÍNH TỔNG TIỀN =================
     private void updateSubtotal() {
         double total = 0;
         for (CartItem i : cartList) {

@@ -5,10 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.Toast;
-
-
-import com.example.myapplication.Fragment.Home_Fragment;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,9 +14,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.myapplication.Fragment.Home_Fragment;
 import com.example.myapplication.Fragment.Product_Fragment;
 import com.example.myapplication.Fragment.Person_Fragment;
-import com.example.myapplication.Fragment.Cart_fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,58 +24,67 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     BottomNavigationView bon;
     FrameLayout framecontent;
+    ImageButton btn_cart;
+    TextView txtCartBadge;
+
+    CartManager cartManager;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false); // Ẩn title
-        framecontent= findViewById(R.id.framecontent);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        framecontent = findViewById(R.id.framecontent);
         replaceFragment(new Home_Fragment());
-        bon = findViewById(R.id.bottomNavigation);
-        bon.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment = new Home_Fragment();
-                int id=item.getItemId();
-                    if(id==R.id.home){
-                        Toast.makeText(MainActivity.this, "Trang chủ", Toast.LENGTH_SHORT).show();
-                        fragment = new Home_Fragment();
-                    }
-                    else if (id== R.id.product) {
-                        Toast.makeText(MainActivity.this, "San Pham", Toast.LENGTH_SHORT).show();
-                        fragment= new Product_Fragment();
 
-                    }
-                    else if(id == R.id.person){
-                        Toast.makeText(MainActivity.this, "nguoi dung", Toast.LENGTH_SHORT).show();
-                        fragment= new Person_Fragment();
-                    }
-                    else{
-                        Toast.makeText(MainActivity.this, "Yeu thich", Toast.LENGTH_SHORT).show();
-                      Intent  cart= new Intent(MainActivity.this,CartActivity.class);
-                        startActivity(cart);
-                    }
+        btn_cart = findViewById(R.id.btn_cart);
+        txtCartBadge = findViewById(R.id.txtCartBadge);
 
-                // Nếu fragment được chọn thì hiển thị nó
-                if (fragment != null) {
-                    replaceFragment(fragment);
-                    return true;
-                }
-                return false;
-            }
+        cartManager = new CartManager(this);
+        updateCartBadge();
+
+        btn_cart.setOnClickListener(v -> {
+            startActivity(new Intent(this, CartActivity.class));
         });
 
+        bon = findViewById(R.id.bottomNavigation);
+        bon.setOnNavigationItemSelectedListener(item -> {
+            Fragment fragment = new Home_Fragment();
+            int id = item.getItemId();
 
+            if (id == R.id.home) fragment = new Home_Fragment();
+            else if (id == R.id.product) fragment = new Product_Fragment();
+            else if (id == R.id.person) fragment = new Person_Fragment();
+
+            replaceFragment(fragment);
+            return true;
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateCartBadge(); // ✅ CẬP NHẬT KHI QUAY LẠI
+    }
+
+    private void updateCartBadge() {
+        int total = cartManager.getTotalQuantity();
+        if (total > 0) {
+            txtCartBadge.setText(String.valueOf(total));
+            txtCartBadge.setVisibility(TextView.VISIBLE);
+        } else {
+            txtCartBadge.setVisibility(TextView.GONE);
+        }
     }
 
     private void replaceFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.framecontent, fragment);
         transaction.commit();
-
     }
-
 }

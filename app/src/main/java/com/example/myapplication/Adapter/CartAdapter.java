@@ -5,20 +5,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.myapplication.Model.CartItem;
 import com.example.myapplication.R;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
-import android.widget.ImageView;
-import com.bumptech.glide.Glide;
-
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
 
@@ -47,7 +46,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     public void onBindViewHolder(@NonNull CartHolder h, int position) {
         CartItem item = list.get(position);
 
-        // ✅ TIỀN
+        // ✅ FORMAT GIÁ VNĐ
         NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
         String formattedPrice = formatter.format(item.getPrice()) + " ₫";
 
@@ -55,34 +54,38 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
         h.txtPrice.setText(formattedPrice);
         h.txtQuantity.setText(String.valueOf(item.getQuantity()));
 
-        // ✅ LOAD ẢNH
+        // ✅ LOAD ẢNH SẢN PHẨM (FIX LỖI KHÔNG HIỂN THỊ ẢNH)
         Glide.with(context)
                 .load(item.getImage())
-                .placeholder(R.drawable.ic_launcher_foreground)
-                .error(R.drawable.ic_launcher_foreground)
+                .placeholder(R.drawable.bench) // ảnh mặc định
+                .error(R.drawable.bench)
                 .into(h.imgProduct);
 
-        // ✅ TĂNG
+        // ✅ NÚT +
         h.btnPlus.setOnClickListener(v -> {
             item.setQuantity(item.getQuantity() + 1);
-            notifyItemChanged(position);
+            notifyItemChanged(h.getAdapterPosition());
             listener.onQuantityChanged();
         });
 
-        // ✅ GIẢM
+        // ✅ NÚT -
         h.btnMinus.setOnClickListener(v -> {
             if (item.getQuantity() > 1) {
                 item.setQuantity(item.getQuantity() - 1);
-                notifyItemChanged(position);
+                notifyItemChanged(h.getAdapterPosition());
                 listener.onQuantityChanged();
             }
         });
 
-        // ✅ XOÁ
+        // ✅ NÚT XOÁ (FIX CRASH)
         h.btnDelete.setOnClickListener(v -> {
-            list.remove(position);
-            notifyItemRemoved(position);
-            listener.onQuantityChanged();
+            int pos = h.getAdapterPosition();
+            if (pos != RecyclerView.NO_POSITION) {
+                list.remove(pos);
+                notifyItemRemoved(pos);
+                notifyItemRangeChanged(pos, list.size());
+                listener.onQuantityChanged();
+            }
         });
     }
 
@@ -92,9 +95,10 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
     }
 
     public static class CartHolder extends RecyclerView.ViewHolder {
+
         TextView txtName, txtPrice, txtQuantity;
         ImageButton btnPlus, btnMinus, btnDelete;
-        ImageView imgProduct;   // ✅ ẢNH
+        ImageView imgProduct; // ✅ ẢNH SẢN PHẨM
 
         public CartHolder(@NonNull View v) {
             super(v);
@@ -107,7 +111,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
             btnMinus = v.findViewById(R.id.btnMinus);
             btnDelete = v.findViewById(R.id.btnDelete);
 
-            imgProduct = v.findViewById(R.id.imgProduct); // ✅ ÁNH XẠ ẢNH
+            imgProduct = v.findViewById(R.id.imgProduct); // ✅ BẮT ẢNH
         }
     }
 }
