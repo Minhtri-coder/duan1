@@ -106,7 +106,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartHolder> {
  
         ImageView imgProduct; // ✅ ẢNH SẢN PHẨM
 
-        ImageView imgProduct;
+//        ImageView imgProduct;
 
 
         public CartHolder(@NonNull View v) {

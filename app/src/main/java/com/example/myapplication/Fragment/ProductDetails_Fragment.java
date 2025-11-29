@@ -1,8 +1,11 @@
 package com.example.myapplication.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -136,7 +139,8 @@ public class ProductDetails_Fragment extends Fragment {
                     .getString("userId", "guest");
 
             CartManager cartManager = new CartManager(requireContext(), userId);
-
+            LocalBroadcastManager.getInstance(requireContext())
+                    .sendBroadcast(new Intent("UPDATE_BADGE"));
             cartManager.addToCart(cartItem);
 
             Toast.makeText(getContext(), "✅ Đã thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
