@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(new Home_Fragment());
 
         // ✅ GIỎ HÀNG + BADGE TRÊN TOOLBAR
-//        btn_cart = findViewById(R.id.btn_cart);
-//        txtCartBadge = findViewById(R.id.txtCartBadge);
+        btn_cart = findViewById(R.id.btn_cart);
+        txtCartBadge = findViewById(R.id.txtCartBadge);
 
         String userId = getSharedPreferences("USER", MODE_PRIVATE)
                 .getString("userId", "guest");
@@ -103,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
             txtCartBadge.setText(String.valueOf(total));
             txtCartBadge.setVisibility(TextView.VISIBLE);
 
-            // ✅ ANIMATION NHẢY
             ScaleAnimation scaleAnimation = new ScaleAnimation(
                     0.7f, 1.1f,
                     0.7f, 1.1f,
