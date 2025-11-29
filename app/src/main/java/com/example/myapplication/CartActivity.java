@@ -3,6 +3,7 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Adapter.CartAdapter;
 import com.example.myapplication.Model.CartItem;
+import com.google.android.material.button.MaterialButton;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -25,7 +27,7 @@ public class CartActivity extends AppCompatActivity {
     RecyclerView rcvCart;
     TextView txtSubtotal;
     ImageView btnBack;   // ✅ NÚT QUAY VỀ
-
+    MaterialButton btncheckout;
     ArrayList<CartItem> cartList;
     CartAdapter adapter;
 
@@ -41,6 +43,8 @@ public class CartActivity extends AppCompatActivity {
         rcvCart = findViewById(R.id.rcvCart);
         txtSubtotal = findViewById(R.id.txtSubtotal);
         btnBack = findViewById(R.id.btnBack);   // ✅ NÚT BACK
+        btncheckout= findViewById(R.id.btnCheckout);
+
 
         pref = getSharedPreferences("CART_DATA", MODE_PRIVATE);
 
@@ -61,6 +65,15 @@ public class CartActivity extends AppCompatActivity {
             Intent intent = new Intent(CartActivity.this, MainActivity.class);
             startActivity(intent);
             finish(); // ✅ đóng CartActivity
+        });
+        // su kien bam thanh toan
+        btncheckout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(CartActivity.this,Payment_activity.class);
+                intent.putExtra("tongtien", txtSubtotal.getText().toString());
+                startActivity(intent);
+            }
         });
     }
 
