@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 
 import com.example.myapplication.Adapter.ProductAdapter;
+import com.example.myapplication.CartManager;
 import com.example.myapplication.DAO.ProductDao;
 import com.example.myapplication.Model.Product;
 import com.example.myapplication.R;
@@ -24,6 +25,7 @@ public class Product_Fragment extends Fragment {
     private ArrayList<Product>listProduct;
     private ProductDao productDao;
     private ProductAdapter productAdapter;
+    private  CartManager cartManager;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

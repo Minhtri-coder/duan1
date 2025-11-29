@@ -2,6 +2,7 @@ package com.example.myapplication.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.bumptech.glide.Glide;
 import com.example.myapplication.CartManager;
@@ -22,21 +24,28 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewholder>{
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewholder> {
+
     private ArrayList<Product> listProduct;
     private Context context;
-    private ProductAdapter.OnProductClickListener onProductClickListener;
+    private OnProductClickListener onProductClickListener;
     private CartManager cartManager;
-    // ✅ Interface click xem chi tiết
+
     public interface OnProductClickListener {
         void onclickProduct(Product product);
     }
-    public ProductAdapter(Context context, ArrayList<Product> listProduct, ProductAdapter.OnProductClickListener onProductClickListener) {
+
+    public ProductAdapter(Context context, ArrayList<Product> listProduct, OnProductClickListener onProductClickListener) {
         this.listProduct = listProduct;
         this.context = context;
         this.onProductClickListener = onProductClickListener;
-        this.cartManager = new CartManager(context);
+
+        String userId = context.getSharedPreferences("USER", Context.MODE_PRIVATE)
+                .getString("userId", "guest");
+
+        this.cartManager = new CartManager(context, userId);
     }
+
     @NonNull
     @Override
     public viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -49,41 +58,42 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewhold
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
         Product product = listProduct.get(position);
 
-        // ✅ TÊN SẢN PHẨM
         holder.txtProduct.setText(product.getProductName());
 
-        // ✅ FORMAT GIÁ (int → đẹp)
         NumberFormat numberFormat = new DecimalFormat("#,###");
         String gia = numberFormat.format(product.getPrice()).replace(",", ".");
-        holder.txtPrice.setText(gia);
+        holder.txtPrice.setText(gia + " VNĐ");
 
-        // ✅ LOAD ẢNH
         Glide.with(context)
                 .load(product.getProductImage())
                 .placeholder(R.drawable.bench)
                 .error(R.drawable.bench)
                 .into(holder.imgProduct);
 
-        holder.imgProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        holder.imgProduct.setOnClickListener(v -> {
+            if (onProductClickListener != null) {
                 onProductClickListener.onclickProduct(product);
             }
         });
-        holder.btnAddcart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CartItem item = new CartItem(
-                        product.getProductName(),
-                        product.getPrice(),   // ✅ GIỜ LÀ int — ĐÚNG
-                        1,
-                        product.getProductImage()
-                );
 
-                cartManager.addToCart(item);
+        holder.btnAddcart.setOnClickListener(v -> {
+//            if (onProductClickListener != null){
+//                onProductClickListener.onclickProduct(product);
+//            }
+            CartItem item = new CartItem(
+                    product.getProductName(),
+                    product.getPrice(),
+                    1,
+                    product.getProductImage()
+            );
 
-                Toast.makeText(context, "Đã thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
-            }
+            cartManager.addToCart(item);
+
+            // ✅ GỬI TÍN HIỆU CẬP NHẬT BADGE NGAY
+            LocalBroadcastManager.getInstance(context)
+                    .sendBroadcast(new Intent("UPDATE_BADGE"));
+
+            Toast.makeText(context, "Đã thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
         });
     }
 
@@ -93,15 +103,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewhold
     }
 
     public class viewholder extends RecyclerView.ViewHolder {
+
         ImageView imgProduct, btnAddcart;
         TextView txtProduct, txtPrice;
+
         public viewholder(@NonNull View itemView) {
             super(itemView);
             imgProduct = itemView.findViewById(R.id.imgProduct);
             txtProduct = itemView.findViewById(R.id.txtProduct);
             txtPrice = itemView.findViewById(R.id.txtprice);
-
-            // ✅ btnAddcart PHẢI LÀ ImageView TRONG XML
             btnAddcart = itemView.findViewById(R.id.btnAddcart);
         }
     }
