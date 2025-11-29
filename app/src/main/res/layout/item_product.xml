@@ -9,13 +9,14 @@
     app:cardElevation="6dp"
     android:background="@android:color/white">
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <!-- Image + Heart icon -->
         <FrameLayout
+            android:id="@+id/img"
             android:layout_width="match_parent"
             android:layout_height="200dp">
 
@@ -37,17 +38,10 @@
             android:textSize="18sp"
             android:textColor="#111111"
             android:paddingHorizontal="16dp"
+            android:layout_below="@id/img"
             android:fontFamily="sans-serif-medium"/>
 
         <!-- Price + Cart icon -->
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="8dp"
-            android:paddingEnd="16dp"
-            android:paddingLeft="16dp"
-            android:paddingBottom="8dp">
 
             <TextView
                 android:id="@+id/txtprice"
@@ -56,17 +50,27 @@
                 android:text="$499"
                 android:textSize="18sp"
                 android:textColor="#111"
-                android:layout_marginEnd="10dp"/>
+                android:layout_marginEnd="10dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingBottom="8dp"
+                android:layout_below="@id/txtProduct"/>
 
-            <ImageView
-                android:id="@+id/btnAddcart"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:padding="8dp"
-                android:src="@drawable/shoppingcart"
-                android:background="@drawable/border_cart"/>
-        </LinearLayout>
+        <ImageView
+            android:id="@+id/btnAddcart"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="8dp"
+            android:background="@drawable/cart"
+            android:layout_below="@id/txtprice"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="8dp"
+            android:elevation="4dp"
+            android:clickable="true"
+            android:focusable="true"/>
 
-    </LinearLayout>
+
+    </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

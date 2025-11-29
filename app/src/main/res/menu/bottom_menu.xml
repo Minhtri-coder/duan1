@@ -14,7 +14,7 @@
         android:icon="@drawable/ic_product"
         />
     <item
-        android:id="@+id/love"
+        android:id="@+id/cart"
         android:title=" "
         android:icon="@drawable/ic_cart2" />
     <item
