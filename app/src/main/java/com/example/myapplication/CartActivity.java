@@ -2,39 +2,39 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.myapplication.Adapter.CartAdapter;
 import com.example.myapplication.Model.CartItem;
-
+import com.google.android.material.button.MaterialButton;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
 public class CartActivity extends AppCompatActivity {
-
     RecyclerView rcvCart;
     TextView txtSubtotal;
+    ImageView btnBack;   // ✅ NÚT QUAY VỀ
+    MaterialButton btncheckout;
     ImageView btnBack;
-
     ArrayList<CartItem> cartList;
     CartAdapter adapter;
     CartManager cartManager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
-
         rcvCart = findViewById(R.id.rcvCart);
         txtSubtotal = findViewById(R.id.txtSubtotal);
+        btnBack = findViewById(R.id.btnBack);   // ✅ NÚT BACK
+        btncheckout= findViewById(R.id.btnCheckout);
         btnBack = findViewById(R.id.btnBack);
-
         String userId = getSharedPreferences("USER", MODE_PRIVATE)
                 .getString("userId", "guest");
 
@@ -52,6 +52,15 @@ public class CartActivity extends AppCompatActivity {
 
         btnBack.setOnClickListener(v -> {
             finish();
+        });
+        // su kien bam thanh toan
+        btncheckout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(CartActivity.this,Payment_activity.class);
+                intent.putExtra("tongtien", txtSubtotal.getText().toString());
+                startActivity(intent);
+            }
         });
     }
 
