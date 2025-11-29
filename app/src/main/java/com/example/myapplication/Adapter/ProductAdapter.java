@@ -2,6 +2,7 @@ package com.example.myapplication.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.bumptech.glide.Glide;
 import com.example.myapplication.CartManager;
@@ -29,7 +31,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewhold
     private OnProductClickListener onProductClickListener;
     private CartManager cartManager;
 
-    // ✅ Interface click xem chi tiết
     public interface OnProductClickListener {
         void onclickProduct(Product product);
     }
@@ -38,7 +39,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewhold
         this.listProduct = listProduct;
         this.context = context;
         this.onProductClickListener = onProductClickListener;
-        this.cartManager = new CartManager(context);
+
+        String userId = context.getSharedPreferences("USER", Context.MODE_PRIVATE)
+                .getString("userId", "guest");
+
+        this.cartManager = new CartManager(context, userId);
     }
 
     @NonNull
@@ -53,42 +58,40 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewhold
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
         Product product = listProduct.get(position);
 
-        // ✅ TÊN SẢN PHẨM
         holder.txtProduct.setText(product.getProductName());
 
-        // ✅ FORMAT GIÁ
         NumberFormat numberFormat = new DecimalFormat("#,###");
         String gia = numberFormat.format(product.getPrice()).replace(",", ".");
         holder.txtPrice.setText(gia + " VNĐ");
 
-        // ✅ LOAD ẢNH
         Glide.with(context)
                 .load(product.getProductImage())
                 .placeholder(R.drawable.bench)
                 .error(R.drawable.bench)
                 .into(holder.imgProduct);
 
-        // ✅ CLICK XEM CHI TIẾT
         holder.imgProduct.setOnClickListener(v -> {
             if (onProductClickListener != null) {
                 onProductClickListener.onclickProduct(product);
             }
         });
 
-        // ✅ ADD TO CART
         holder.btnAddcart.setOnClickListener(v -> {
             CartItem item = new CartItem(
                     product.getProductName(),
-                    product.getPrice(),      // ✅ price là int → dùng thẳng
+                    product.getPrice(),
                     1,
-                    product.getProductImage() // ✅ THÊM ẢNH
+                    product.getProductImage()
             );
 
             cartManager.addToCart(item);
 
+            // ✅ GỬI TÍN HIỆU CẬP NHẬT BADGE NGAY
+            LocalBroadcastManager.getInstance(context)
+                    .sendBroadcast(new Intent("UPDATE_BADGE"));
+
             Toast.makeText(context, "Đã thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
         });
-
     }
 
     @Override
@@ -96,7 +99,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewhold
         return listProduct.size();
     }
 
-    // ================= VIEW HOLDER =================
     public class viewholder extends RecyclerView.ViewHolder {
 
         ImageView imgProduct, btnAddcart;
@@ -104,11 +106,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewhold
 
         public viewholder(@NonNull View itemView) {
             super(itemView);
-
             imgProduct = itemView.findViewById(R.id.imgProduct);
             txtProduct = itemView.findViewById(R.id.txtProduct);
             txtPrice = itemView.findViewById(R.id.txtprice);
-
             btnAddcart = itemView.findViewById(R.id.btnAddcart);
         }
     }

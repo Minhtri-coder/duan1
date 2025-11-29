@@ -13,12 +13,19 @@ import java.util.ArrayList;
 public class CartManager {
 
     private static final String CART_PREF = "CART_DATA";
+
     private SharedPreferences pref;
     private Gson gson;
+    private String userId;
 
-    public CartManager(Context context) {
+    public CartManager(Context context, String userId) {
         pref = context.getSharedPreferences(CART_PREF, Context.MODE_PRIVATE);
         gson = new Gson();
+        this.userId = userId;
+    }
+
+    private String getUserCartKey() {
+        return "cart_" + userId;
     }
 
     public void addToCart(CartItem item) {
@@ -26,7 +33,7 @@ public class CartManager {
 
         for (CartItem c : list) {
             if (c.getName().equals(item.getName())) {
-                c.setQuantity(c.getQuantity() + 1);
+                c.setQuantity(c.getQuantity() + item.getQuantity());
                 saveCart(list);
                 return;
             }
@@ -37,23 +44,26 @@ public class CartManager {
     }
 
     public ArrayList<CartItem> getCart() {
-        String json = pref.getString("cart", "");
-        Type type = new TypeToken<ArrayList<CartItem>>(){}.getType();
+        String json = pref.getString(getUserCartKey(), "");
+        Type type = new TypeToken<ArrayList<CartItem>>() {}.getType();
 
         if (json.isEmpty()) return new ArrayList<>();
         return gson.fromJson(json, type);
     }
 
     public void saveCart(ArrayList<CartItem> list) {
-        pref.edit().putString("cart", gson.toJson(list)).apply();
+        pref.edit().putString(getUserCartKey(), gson.toJson(list)).apply();
     }
 
-    // ✅ TỔNG SỐ LƯỢNG ĐỂ HIỂN THỊ BADGE
     public int getTotalQuantity() {
         int total = 0;
         for (CartItem item : getCart()) {
             total += item.getQuantity();
         }
         return total;
+    }
+
+    public void clearCart() {
+        pref.edit().remove(getUserCartKey()).apply();
     }
 }

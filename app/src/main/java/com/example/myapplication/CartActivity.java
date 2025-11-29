@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,10 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Adapter.CartAdapter;
 import com.example.myapplication.Model.CartItem;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -28,9 +24,7 @@ public class CartActivity extends AppCompatActivity {
 
     ArrayList<CartItem> cartList;
     CartAdapter adapter;
-
-    SharedPreferences pref;
-    Gson gson = new Gson();
+    CartManager cartManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +35,14 @@ public class CartActivity extends AppCompatActivity {
         txtSubtotal = findViewById(R.id.txtSubtotal);
         btnBack = findViewById(R.id.btnBack);
 
-        pref = getSharedPreferences("CART_DATA", MODE_PRIVATE);
+        String userId = getSharedPreferences("USER", MODE_PRIVATE)
+                .getString("userId", "guest");
 
-        loadCart();
+        cartManager = new CartManager(this, userId);
+        cartList = cartManager.getCart();
 
         adapter = new CartAdapter(this, cartList, () -> {
-            saveCart();
+            cartManager.saveCart(cartList);
             updateSubtotal();
         });
 
@@ -54,23 +50,9 @@ public class CartActivity extends AppCompatActivity {
         rcvCart.setAdapter(adapter);
         updateSubtotal();
 
-        // ✅ BACK VỀ HOME
         btnBack.setOnClickListener(v -> {
-            startActivity(new Intent(this, MainActivity.class));
             finish();
         });
-    }
-
-    private void loadCart() {
-        String json = pref.getString("cart", null);
-        Type type = new TypeToken<ArrayList<CartItem>>() {}.getType();
-
-        if (json == null) cartList = new ArrayList<>();
-        else cartList = gson.fromJson(json, type);
-    }
-
-    private void saveCart() {
-        pref.edit().putString("cart", gson.toJson(cartList)).apply();
     }
 
     private void updateSubtotal() {
