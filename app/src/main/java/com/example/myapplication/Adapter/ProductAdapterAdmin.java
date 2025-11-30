@@ -23,6 +23,8 @@ import com.example.myapplication.Model.Product;
 import com.example.myapplication.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class ProductAdapterAdmin extends RecyclerView.Adapter<ProductAdapterAdmin.viewholder>{
@@ -63,10 +65,14 @@ public class ProductAdapterAdmin extends RecyclerView.Adapter<ProductAdapterAdmi
                 View view1 = inflater.inflate(R.layout.item_dialog_update_product,null);
                 EditText edtName = view1.findViewById(R.id.edtNameProduct);
                 EditText edtPrice = view1.findViewById(R.id.edtPriceProduct);
+                EditText edtQuantity = view1.findViewById(R.id.edtQuantityProduct);
                 EditText edtImage = view1.findViewById(R.id.edtImgProduct);
                 EditText edtDec = view1.findViewById(R.id.edtDescriptionProduct);
                 edtName.setText(product.getProductName());
-                edtPrice.setText(product.getPrice());
+                NumberFormat numberFormat = new DecimalFormat("#,###");
+                String price = numberFormat.format(product.getPrice());
+                edtPrice.setText(price);
+                edtQuantity.setText(String.valueOf(product.getQuantity()));
                 edtImage.setText(product.getProductImage());
                 edtDec.setText(product.getProductDescription());
                 Button btnUpdate = view1.findViewById(R.id.btnUpdateProduct);
@@ -79,9 +85,10 @@ public class ProductAdapterAdmin extends RecyclerView.Adapter<ProductAdapterAdmi
                         String id = product.getProductId();
                         String name = edtName.getText().toString();
                         String price = edtPrice.getText().toString();
+                        String quantity = edtQuantity.getText().toString();
                         String image = edtImage.getText().toString();
                         String dec = edtDec.getText().toString();
-                        Product product1 = new Product(name,Integer.parseInt(price),image,dec);
+                        Product product1 = new Product(name,Integer.parseInt(price),Integer.parseInt(quantity),image,dec);
                         productDao = new ProductDao();
                         productDao.UpdateProduct(id,product1);
                         loadProduct2();
