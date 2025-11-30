@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.myapplication.Fragment.Home_Fragment;
+import com.example.myapplication.Fragment.ListOrderFragment;
 import com.example.myapplication.Fragment.Product_Fragment;
 import com.example.myapplication.Fragment.Person_Fragment;
 import com.google.android.material.badge.BadgeDrawable;
@@ -66,8 +67,7 @@ public class MainActivity extends AppCompatActivity {
         btn_cart = findViewById(R.id.btn_cart);
         txtCartBadge = findViewById(R.id.txtCartBadge);
 
-        String userId = getSharedPreferences("USER", MODE_PRIVATE)
-                .getString("userId", "guest");
+        String userId = getSharedPreferences("USER", MODE_PRIVATE).getString("userId", "guest");
 
         cartManager = new CartManager(this, userId);
 
@@ -84,8 +84,7 @@ public class MainActivity extends AppCompatActivity {
         cartBadge = bon.getOrCreateBadge(R.id.cart);
         cartBadge.setVisible(false);
 
-        LocalBroadcastManager.getInstance(this)
-                .registerReceiver(bagRecevier, new IntentFilter("UPDATE_BADGE"));
+        LocalBroadcastManager.getInstance(this).registerReceiver(bagRecevier, new IntentFilter("UPDATE_BADGE"));
 
         bon.setOnNavigationItemSelectedListener(item -> {
             Fragment fragment = null;
@@ -93,17 +92,16 @@ public class MainActivity extends AppCompatActivity {
 
             if (id == R.id.home) {
                 fragment = new Home_Fragment();
-            }
-            else if (id == R.id.product) {
+            } else if (id == R.id.product) {
                 fragment = new Product_Fragment();
-            }
-            else if (id == R.id.person) {
+            } else if (id == R.id.person) {
                 fragment = new Person_Fragment();
-            }
-            else if (id == R.id.cart) {
+            } else if (id == R.id.cart) {
                 // ✅ GIỎ HÀNG DƯỚI BOTTOM → MỞ CART
                 startActivity(new Intent(this, CartActivity.class));
                 return false; // ✅ KHÔNG LOAD FRAGMENT
+            }else if (id == R.id.order) {
+                fragment = new ListOrderFragment();
             }
 
             if (fragment != null) replaceFragment(fragment);
@@ -115,14 +113,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-            updateCartBadge();
+        updateCartBadge();
     }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         LocalBroadcastManager.getInstance(this).unregisterReceiver(bagRecevier);
     }
-
 
 
     // ✅ CẬP NHẬT BADGE

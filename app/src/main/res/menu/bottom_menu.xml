@@ -18,6 +18,10 @@
         android:title=" "
         android:icon="@drawable/ic_cart2" />
     <item
+        android:id="@+id/order"
+        android:title=" "
+        android:icon="@drawable/checklist" />
+    <item
         android:id="@+id/person"
         android:title=""
         android:icon="@drawable/ic_person" />

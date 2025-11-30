@@ -22,7 +22,7 @@ public class CartActivity extends AppCompatActivity {
     TextView txtSubtotal;
     ImageView btnBack;   // ✅ NÚT QUAY VỀ
     MaterialButton btncheckout;
-    ImageView btnBack;
+//    ImageView btnBack;
     ArrayList<CartItem> cartList;
     CartAdapter adapter;
     CartManager cartManager;
