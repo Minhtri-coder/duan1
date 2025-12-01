@@ -18,7 +18,9 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         jcenter()
-
+        flatDir {
+            dirs("app/libs") // ✅ Chỉ khai báo ở đây
+        }
     }
 }
 

@@ -8,7 +8,7 @@
     android:paddingBottom="8dp">
 
     <ImageView
-        android:id="@+id/itemImageView"
+        android:id="@+id/imgOrderDetails"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:scaleType="centerCrop"
@@ -18,20 +18,20 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <TextView
-        android:id="@+id/itemNameTextView"
+        android:id="@+id/txtNameOrderDetail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textSize="20sp"
         android:text="Ghế dài"
         android:layout_marginStart="16dp"
-        app:layout_constraintTop_toTopOf="@id/itemImageView"
-        app:layout_constraintStart_toEndOf="@id/itemImageView"
-        app:layout_constraintEnd_toStartOf="@id/itemPriceTextView"
+        app:layout_constraintTop_toTopOf="@id/imgOrderDetails"
+        app:layout_constraintStart_toEndOf="@id/imgOrderDetails"
+        app:layout_constraintEnd_toStartOf="@id/txtPriceOrderDetail"
         app:layout_constraintHorizontal_bias="0"/>
 
     <TextView
-        android:id="@+id/itemDetailsTextView"
+        android:id="@+id/txtQuantityOrderDetails"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@android:color/darker_gray"
@@ -39,19 +39,19 @@
         android:text="Qty:1"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/itemNameTextView"
-        app:layout_constraintStart_toEndOf="@id/itemImageView"
-        app:layout_constraintEnd_toStartOf="@id/itemPriceTextView"/>
+        app:layout_constraintTop_toBottomOf="@id/txtNameOrderDetail"
+        app:layout_constraintStart_toEndOf="@id/imgOrderDetails"
+        app:layout_constraintEnd_toStartOf="@id/txtPriceOrderDetail"/>
 
     <TextView
-        android:id="@+id/itemPriceTextView"
+        android:id="@+id/txtPriceOrderDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:text="20.000.000"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="@id/itemImageView"
+        app:layout_constraintTop_toTopOf="@id/imgOrderDetails"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/itemImageView"/>
+        app:layout_constraintBottom_toBottomOf="@id/imgOrderDetails"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
