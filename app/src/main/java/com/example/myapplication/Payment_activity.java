@@ -206,7 +206,7 @@ public class Payment_activity extends AppCompatActivity {
                         orderDetail.put("productName", item.getName());
                         orderDetail.put("quantity", item.getQuantity());
                         orderDetail.put("price", item.getPrice());
-                        orderDetail.put("image", item.getImage());  // nếu muốn lưu ảnh
+                        orderDetail.put("productImage", item.getImage());  // nếu muốn lưu ảnh
 
                         // Thêm vào Firestore
                         db.collection("orderDetails")

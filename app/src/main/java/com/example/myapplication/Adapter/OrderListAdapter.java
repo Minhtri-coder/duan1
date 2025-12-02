@@ -20,11 +20,15 @@ import java.util.ArrayList;
 public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.viewholder>{
     private Context context;
     private ArrayList<OrderList>list;
+    private OnOrderClickListener clickListener;
+    public interface OnOrderClickListener{
+        void onclickOrder(OrderList orderList);
+    }
 
-
-    public OrderListAdapter(Context context, ArrayList<OrderList> list) {
+    public OrderListAdapter(Context context, ArrayList<OrderList> list, OnOrderClickListener clickListener) {
         this.context = context;
         this.list = list;
+        this.clickListener = clickListener;
     }
 
     @NonNull
@@ -48,7 +52,9 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.view
         holder.txtOrderDeatails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (clickListener != null){
+                    clickListener.onclickOrder(orderList);
+                }
             }
         });
     }

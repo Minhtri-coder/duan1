@@ -18,7 +18,9 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         jcenter()
-
+        flatDir {
+            dirs("libs")  // chú ý phải dùng dấu ngoặc kép
+        }
     }
 }
 
