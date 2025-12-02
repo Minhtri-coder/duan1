@@ -62,6 +62,7 @@ public class productAdminTestFragment extends Fragment {
         View view = inflater.inflate(R.layout.item_dialog_add_product,null);
         EditText edtName = view.findViewById(R.id.edtNameProduct);
         EditText edtPrice = view.findViewById(R.id.edtPriceProduct);
+        EditText edtQuantity = view.findViewById(R.id.edtQuantityProduct);
         EditText edtImage = view.findViewById(R.id.edtImgProduct);
         EditText edtDec = view.findViewById(R.id.edtDescriptionProduct);
         Button btnAdd = view.findViewById(R.id.btnAddProduct);
@@ -73,9 +74,10 @@ public class productAdminTestFragment extends Fragment {
             public void onClick(View view) {
                 String name = edtName.getText().toString();
                 String price = edtPrice.getText().toString();
+                String quantity = edtQuantity.getText().toString();
                 String image = edtImage.getText().toString();
                 String dec = edtDec.getText().toString();
-                Product product = new Product(name,Integer.parseInt(price),image,dec);
+                Product product = new Product(name,Integer.parseInt(price),Integer.parseInt(quantity),image,dec);
                 productDao.Addproduct(product);
                 loadproduct();
                 dialog.dismiss();

@@ -1,8 +1,12 @@
 package com.example.myapplication.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,8 +32,9 @@ public class ProductDetails_Fragment extends Fragment {
     Button addToCartButton;
 
     ProductDao productDao;
-    Product currentProduct;   // ✅ LƯU SẢN PHẨM ĐANG XEM
-    int quantity = 1;         // ✅ SỐ LƯỢNG BAN ĐẦU
+
+    private Product currentProduct;   // ✅ CHỈ KHAI BÁO 1 LẦN DUY NHẤT
+    int quantity = 1;                 // ✅ SỐ LƯỢNG BAN ĐẦU
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,9 +77,10 @@ public class ProductDetails_Fragment extends Fragment {
         productDao.getProduct(productid, new ProductDao.OnProductLoadedListener() {
             @Override
             public void onloaded(Product product) {
-                currentProduct = product;
 
-                Glide.with(getContext())
+                currentProduct = product;   // ✅ LƯU SẢN PHẨM ĐANG XEM
+
+                Glide.with(requireContext())
                         .load(product.getProductImage())
                         .placeholder(R.drawable.bench)
                         .error(R.drawable.bench)
@@ -84,8 +90,7 @@ public class ProductDetails_Fragment extends Fragment {
                 txtDec.setText(product.getProductDescription());
 
                 NumberFormat numberFormat = new DecimalFormat("#,###");
-                String price = numberFormat.format(product.getPrice());
-                price = price.replace(",", ".");
+                String price = numberFormat.format(product.getPrice()).replace(",", ".");
                 txtPrice.setText(price + " ₫");
             }
 
@@ -125,10 +130,11 @@ public class ProductDetails_Fragment extends Fragment {
             }
 
             CartItem cartItem = new CartItem(
-                    currentProduct.getProductName(),   // name
-                    currentProduct.getPrice(),         // price
-                    quantity,                          // ✅ SỐ LƯỢNG ĐÃ CHỌN
-                    currentProduct.getProductImage()   // image
+                    currentProduct.getProductId(),     // ✅ ĐÚNG CHUẨN ID
+                    currentProduct.getProductName(),
+                    currentProduct.getPrice(),
+                    quantity,
+                    currentProduct.getProductImage()
             );
 
             String userId = requireContext()
@@ -136,8 +142,11 @@ public class ProductDetails_Fragment extends Fragment {
                     .getString("userId", "guest");
 
             CartManager cartManager = new CartManager(requireContext(), userId);
-
             cartManager.addToCart(cartItem);
+
+            // ✅ GỬI BROADCAST UPDATE BADGE
+            LocalBroadcastManager.getInstance(requireContext())
+                    .sendBroadcast(new Intent("UPDATE_BADGE"));
 
             Toast.makeText(getContext(), "✅ Đã thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
         });

@@ -12,58 +12,71 @@ import java.util.ArrayList;
 
 public class CartManager {
 
-    private static final String CART_PREF = "CART_DATA";
-
-    private SharedPreferences pref;
-    private Gson gson;
+    private Context context;
     private String userId;
+    private SharedPreferences pref;
+    private Gson gson = new Gson();
 
     public CartManager(Context context, String userId) {
-        pref = context.getSharedPreferences(CART_PREF, Context.MODE_PRIVATE);
-        gson = new Gson();
+        this.context = context;
         this.userId = userId;
+
+        pref = context.getSharedPreferences("CART_" + userId, Context.MODE_PRIVATE);
     }
 
-    private String getUserCartKey() {
-        return "cart_" + userId;
-    }
-
-    public void addToCart(CartItem item) {
-        ArrayList<CartItem> list = getCart();
-
-        for (CartItem c : list) {
-            if (c.getName().equals(item.getName())) {
-                c.setQuantity(c.getQuantity() + item.getQuantity());
-                saveCart(list);
-                return;
-            }
-        }
-
-        list.add(item);
-        saveCart(list);
-    }
-
+    // ✅ LẤY GIỎ HÀNG
     public ArrayList<CartItem> getCart() {
-        String json = pref.getString(getUserCartKey(), "");
+        String json = pref.getString("cart", null);
         Type type = new TypeToken<ArrayList<CartItem>>() {}.getType();
 
-        if (json.isEmpty()) return new ArrayList<>();
+        if (json == null) return new ArrayList<>();
         return gson.fromJson(json, type);
     }
 
-    public void saveCart(ArrayList<CartItem> list) {
-        pref.edit().putString(getUserCartKey(), gson.toJson(list)).apply();
+    // ✅ LƯU GIỎ HÀNG
+    public void saveCart(ArrayList<CartItem> cartList) {
+        pref.edit().putString("cart", gson.toJson(cartList)).apply();
     }
 
+    // ✅ ADD TO CART – CHỐNG NULL – KHÔNG CRASH
+    public void addToCart(CartItem cartItem) {
+
+        // ✅ CHỐNG NULL ID
+        if (cartItem.getProductId() == null) {
+            return; // không làm gì nếu ID lỗi
+        }
+
+        ArrayList<CartItem> cartList = getCart();
+        boolean found = false;
+
+        for (CartItem item : cartList) {
+
+            // ✅ CHỐNG NULL 2 ĐẦU TRƯỚC KHI equals
+            if (item.getProductId() != null &&
+                    item.getProductId().equals(cartItem.getProductId())) {
+
+                item.setQuantity(item.getQuantity() + cartItem.getQuantity());
+                found = true;
+                break;
+            }
+        }
+
+        if (!found) {
+            cartList.add(cartItem);
+        }
+
+        saveCart(cartList);
+    }
+
+    // ✅ LẤY TỔNG SỐ LƯỢNG (CHO BADGE)
     public int getTotalQuantity() {
+        ArrayList<CartItem> cartList = getCart();
         int total = 0;
-        for (CartItem item : getCart()) {
+
+        for (CartItem item : cartList) {
             total += item.getQuantity();
         }
-        return total;
-    }
 
-    public void clearCart() {
-        pref.edit().remove(getUserCartKey()).apply();
+        return total;
     }
 }

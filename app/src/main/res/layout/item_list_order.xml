@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="12dp"
+    app:cardCornerRadius="18dp"
+    app:cardElevation="3dp"
+    android:padding="18dp"
+    android:background="@android:color/white">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/txtOrderID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order ID #f110"
+            android:textSize="18dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/txtStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delivered"
+            android:paddingTop="6dp"
+            android:paddingEnd="12dp"
+            android:layout_alignParentEnd="true"/>
+
+           <TextView
+               android:id="@+id/txtCreatAt"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="October 26, 2023"
+               android:textSize="15dp"
+               android:layout_marginTop="8dp"
+               android:textColor="#6F6F6F"
+               android:layout_below="@id/txtOrderID"/>
+
+           <TextView
+               android:id="@+id/txtTotalPrice"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="1.250.000"
+               android:textSize="19dp"
+               android:textStyle="bold"
+               android:layout_below="@id/txtCreatAt"
+               android:textColor="@color/black"
+               android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/txtViewDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="View Details"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/txtStatus"
+            android:layout_marginTop="20dp"
+            android:paddingEnd="12dp"
+            android:background="@drawable/border_button"
+            android:padding="10dp"
+            android:textColor="@color/white"/>
+
+    </RelativeLayout>
+</com.google.android.material.card.MaterialCardView>

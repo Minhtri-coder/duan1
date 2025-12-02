@@ -78,6 +78,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewhold
 
         holder.btnAddcart.setOnClickListener(v -> {
             CartItem item = new CartItem(
+                    product.getProductId(),      // ✅ ID
                     product.getProductName(),
                     product.getPrice(),
                     1,
@@ -85,6 +86,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewhold
             );
 
             cartManager.addToCart(item);
+
 
             // ✅ GỬI TÍN HIỆU CẬP NHẬT BADGE NGAY
             LocalBroadcastManager.getInstance(context)

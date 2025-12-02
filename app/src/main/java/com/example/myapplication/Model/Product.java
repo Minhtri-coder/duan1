@@ -5,9 +5,19 @@ public class Product {
     String productName;
     String productImage;
     String productDescription;
+    int quantity;
     int price;
 
     public Product() {
+    }
+
+    public Product(String productId, String productName, String productImage, String productDescription, int price, int quantity) {
+        this.productId = productId;
+        this.productName = productName;
+        this.productImage = productImage;
+        this.productDescription = productDescription;
+        this.price = price;
+        this.quantity = quantity;
     }
 
     public Product(String productId, String productName, String productImage, String productDescription, int price) {
@@ -21,6 +31,14 @@ public class Product {
     public Product(String productName, int price, String productImage, String productDescription) {
         this.productName = productName;
         this.price = price;
+        this.productImage = productImage;
+        this.productDescription = productDescription;
+    }
+
+    public Product(String productName, int price, int quantity, String productImage, String productDescription) {
+        this.productName = productName;
+        this.price = price;
+        this.quantity = quantity;
         this.productImage = productImage;
         this.productDescription = productDescription;
     }
@@ -69,5 +87,13 @@ public class Product {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
