@@ -128,6 +128,7 @@ public class ProductDetails_Fragment extends Fragment {
             }
 
             CartItem cartItem = new CartItem(
+                    currentProduct.getProductId(),
                     currentProduct.getProductName(),   // name
                     currentProduct.getPrice(),         // price
                     quantity,                          // ✅ SỐ LƯỢNG ĐÃ CHỌN

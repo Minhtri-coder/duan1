@@ -1,6 +1,7 @@
 package com.example.myapplication.Model;
 
 public class CartItem {
+    private String productId;
     private String name;
     private double price;
     private int quantity;
@@ -8,11 +9,20 @@ public class CartItem {
 
     public CartItem() {}
 
-    public CartItem(String name, double price, int quantity, String image) {
+    public CartItem(String productId, String name, double price, int quantity, String image) {
+        this.productId = productId;
         this.name = name;
         this.price = price;
         this.quantity = quantity;
         this.image = image;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
     public String getName() { return name; }

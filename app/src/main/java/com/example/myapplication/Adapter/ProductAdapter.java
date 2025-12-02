@@ -81,6 +81,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewhold
 //                onProductClickListener.onclickProduct(product);
 //            }
             CartItem item = new CartItem(
+                    product.getProductId(),
                     product.getProductName(),
                     product.getPrice(),
                     1,

@@ -32,7 +32,7 @@ public class CartManager {
         ArrayList<CartItem> list = getCart();
 
         for (CartItem c : list) {
-            if (c.getName().equals(item.getName())) {
+            if (c.getProductId().equals(item.getProductId())) {
                 c.setQuantity(c.getQuantity() + item.getQuantity());
                 saveCart(list);
                 return;

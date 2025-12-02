@@ -57,8 +57,10 @@ public class CartActivity extends AppCompatActivity {
         btncheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent= new Intent(CartActivity.this,Payment_activity.class);
+                Intent intent = new Intent(CartActivity.this, Payment_activity.class);
                 intent.putExtra("tongtien", txtSubtotal.getText().toString());
+                // ✅ Gửi cả danh sách CartItem
+                intent.putExtra("cartList", new Gson().toJson(cartList));
                 startActivity(intent);
             }
         });
