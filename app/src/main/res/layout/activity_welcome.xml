@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".welcome"
+    android:orientation="vertical"
+    >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/welcome"
+            android:scaleType="centerCrop">
+        </ImageView>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="100dp"
+            >
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="Chọn Nội Thất tốt cho ngôi nhà của mình"
+                android:textSize="30dp"
+                android:textStyle="bold"
+                android:layout_above="@id/text2"
+                android:layout_marginBottom="20dp">
+            </TextView>
+            <TextView
+                android:id="@id/text2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:text="chọn đúng nội thất mang lại cảm giác thoải mái"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:layout_above="@id/getStart"
+                android:layout_margin="10dp"
+              >
+            </TextView>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/getStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="get start"
+                android:background="@drawable/border_button"
+                android:textColor="#fff"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="20dp"
+                />
+        </RelativeLayout>
+
+    </FrameLayout>
+
+
+
+
+</LinearLayout>

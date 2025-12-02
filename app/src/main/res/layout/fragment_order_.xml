@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvProduct"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/txtTotal_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tổng tiền sản phẩm: 0Đ"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:textColor="#BCBCBC"
+        android:padding="6dp" />
+    <TextView
+        android:id="@+id/txtTotal_Ship"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#BCBCBC"
+        android:text="Vận chuyển: 0Đ"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:padding="6dp" />
+    <TextView
+        android:id="@+id/txtTotalFull"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tổng tiền: 0Đ"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:padding="6dp" />
+
+    <Button
+        android:id="@+id/btnBuy"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:backgroundTint="#1A9E88"
+        android:text="Mua ngay"
+        android:textColor="#ffffff"
+        android:textStyle="bold"/>
+</LinearLayout>
