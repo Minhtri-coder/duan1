@@ -34,7 +34,23 @@ public class ListOrderFragment extends Fragment {
         orderDao = new OrderDao();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recListOrder.setLayoutManager(linearLayoutManager);
+
         orderListAdapter = new OrderListAdapter(getContext(),list);
+
+        orderListAdapter = new OrderListAdapter(getContext(), list, new OrderListAdapter.OnOrderClickListener() {
+            @Override
+            public void onclickOrder(OrderList orderList) {
+                Fragment fragmentOder = new Order_details_Fragment();
+                Bundle bundle = new Bundle();
+                bundle.putString("orderid",orderList.getOrderID());
+                fragmentOder.setArguments(bundle);
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.framecontent,fragmentOder)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
         recListOrder.setAdapter(orderListAdapter);
         loadData();
         return view;

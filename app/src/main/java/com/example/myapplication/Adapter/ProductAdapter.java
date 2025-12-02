@@ -77,6 +77,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewhold
         });
 
         holder.btnAddcart.setOnClickListener(v -> {
+//            if (onProductClickListener != null){
+//                onProductClickListener.onclickProduct(product);
+//            }
             CartItem item = new CartItem(
                     product.getProductId(),      // ✅ ID
                     product.getProductName(),

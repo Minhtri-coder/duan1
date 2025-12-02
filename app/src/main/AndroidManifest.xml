@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -15,12 +16,33 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="31">
         <activity
+
+
+            android:name=".payment_succesful"
+            android:exported="false" />
+        <activity
+            android:name=".Payment_activity"
+            android:exported="true"
+            android:label="Merchant Demo"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="app"
+                    android:scheme="demozpdk" />
+            </intent-filter>
+        </activity>
+        <activity
+
             android:name=".UpdateAccountActivity"
             android:exported="false" />
         <activity
             android:name=".ViewAccountActivity"
             android:exported="false" />
         <activity
+
             android:name=".Payment_activity"
             android:exported="true"
             android:launchMode="singleTask">
@@ -39,8 +61,9 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".MainActivity"
+            android:exported="true">
+
         </activity>
         <activity
             android:name=".AdminMain"
@@ -53,14 +76,32 @@
 
         </activity> <!-- ✅ Màn hình Đăng ký -->
 
+            android:exported="true" /> <!-- ✅ Màn hình chính (MainActivity) -->
+        <activity
+            android:name=".welcome"
+            android:exported="true" /> <!-- ✅ Màn hình Đăng ký -->
+
         <activity
             android:name=".RegisterActivity"
             android:exported="true" />
         <activity
             android:name=".LoginActivity"
+
             android:exported="true" />
         <activity android:name=".CartActivity"
             android:exported="false"/>
+
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CartActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

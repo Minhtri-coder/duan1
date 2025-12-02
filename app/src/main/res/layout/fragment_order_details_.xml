@@ -104,6 +104,9 @@
                 />
 
             <androidx.recyclerview.widget.RecyclerView
+
+
+                android:id="@+id/recOrderDetails"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"/>
@@ -112,4 +115,18 @@
 
 
     </com.google.android.material.card.MaterialCardView>
+    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnbackhome"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:text="back home"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#000000"
+        app:cornerRadius="12dp"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_marginTop="24dp"/>
+
 </LinearLayout>

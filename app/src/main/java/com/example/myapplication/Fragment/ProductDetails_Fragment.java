@@ -142,6 +142,11 @@ public class ProductDetails_Fragment extends Fragment {
                     .getString("userId", "guest");
 
             CartManager cartManager = new CartManager(requireContext(), userId);
+
+
+            LocalBroadcastManager.getInstance(requireContext())
+                    .sendBroadcast(new Intent("UPDATE_BADGE"));
+
             cartManager.addToCart(cartItem);
 
             // ✅ GỬI BROADCAST UPDATE BADGE

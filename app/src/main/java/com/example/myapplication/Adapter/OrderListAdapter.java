@@ -11,6 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Model.OrderList;
+
+import com.example.myapplication.Model.Orderdetails;
+
 import com.example.myapplication.R;
 
 import java.text.DecimalFormat;
@@ -22,9 +25,22 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.view
     private ArrayList<OrderList>list;
 
 
+
     public OrderListAdapter(Context context, ArrayList<OrderList> list) {
         this.context = context;
         this.list = list;
+
+    private OnOrderClickListener clickListener;
+
+    public interface OnOrderClickListener{
+        void onclickOrder(OrderList orderList);
+    }
+
+    public OrderListAdapter(Context context, ArrayList<OrderList> list, OnOrderClickListener clickListener) {
+        this.context = context;
+        this.list = list;
+        this.clickListener = clickListener;
+
     }
 
     @NonNull
@@ -48,6 +64,10 @@ public class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.view
         holder.txtOrderDeatails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if (clickListener != null){
+                    clickListener.onclickOrder(orderList);
+                }
 
             }
         });
