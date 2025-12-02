@@ -59,13 +59,14 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
 
     public class viewholder extends RecyclerView.ViewHolder {
         ImageView imgOrderDetails;
-        TextView txtName, txtPrice, txtQuantity;
+        TextView txtName, txtPrice, txtQuantity, txtTotal;
         public viewholder(@NonNull View itemView) {
             super(itemView);
             imgOrderDetails = itemView.findViewById(R.id.imgOrderDetails);
             txtName = itemView.findViewById(R.id.txtNameOrderDetail);
             txtPrice = itemView.findViewById(R.id.txtPriceOrderDetail);
             txtQuantity = itemView.findViewById(R.id.txtQuantityOrderDetails);
+
         }
     }
 }

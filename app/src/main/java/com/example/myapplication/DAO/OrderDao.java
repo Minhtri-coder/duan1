@@ -25,8 +25,8 @@ public class OrderDao {
        db = FirebaseFirestore.getInstance();
     }
 
-//    String UserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    String UserID = "u1";
+    String UserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//    String UserID = "u1";
 
     public void getOrderList(OnSuccessListener<ArrayList<OrderList>>listener){
         db.collection("orders")
@@ -45,44 +45,54 @@ public class OrderDao {
                 });
     }
 
-    public void getOrderDetails(String OrderId,OrderDetailCallback orderDetailCallback){
+    public void getOrderDetails(String orderId, OrderDetailCallback callback) {
         db.collection("orderDetails")
-                .whereEqualTo("orderID", OrderId)
+                .whereEqualTo("orderID", orderId)
                 .get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        for (DocumentSnapshot details : queryDocumentSnapshots){
-                            String productId = details.getString("productId");
-                            Long quantity = details.getLong("quantity");
-                            Double price = details.getDouble("price");
-                            DocumentSnapshot doc = queryDocumentSnapshots.getDocuments().get(0); // lấy document đầu tiên
-                            OrderList orderList = doc.toObject(OrderList.class);
-                            orderDetailCallback.onProductLoaded(orderList);
-                            db.collection("products").document("productId")
-                                    .get()
-                                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                                        @Override
-                                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                            String name = documentSnapshot.getString("productName");
-                                            String img = documentSnapshot.getString("productImage");
-                                            Double priceDouble = documentSnapshot.getDouble("price");
-                                            int price = priceDouble != null ? priceDouble.intValue() : 0;
-                                            Long quantityDouble = documentSnapshot.getLong("quantity");
-                                            int quantity = quantityDouble != null ? quantityDouble.intValue() : 0;
-                                            Orderdetails orderdetails = new Orderdetails(name,price,quantity,img);
-                                            orderDetailCallback.onProductLoaded(orderdetails);
-                                        }
+                .addOnSuccessListener(orderDetailsSnap -> {
 
-                                    });
-                        }
+                    if (orderDetailsSnap.isEmpty()) {
+                        callback.onProductsLoaded(new ArrayList<>());
+                        return;
                     }
 
+                    ArrayList<Orderdetails> list = new ArrayList<>();
+                    int totalItems = orderDetailsSnap.size();
+
+                    for (DocumentSnapshot detailDoc : orderDetailsSnap.getDocuments()) {
+
+                        String productId = detailDoc.getString("productId");
+                        Long qtyOrder = detailDoc.getLong("quantity");
+                        Double priceOrder = detailDoc.getDouble("price");
+
+                        // Load thông tin sản phẩm
+                        db.collection("products")
+                                .document(productId)
+                                .get()
+                                .addOnSuccessListener(productSnap -> {
+
+                                    String name = productSnap.getString("productName");
+                                    String img = productSnap.getString("productImage");
+
+                                    int qty = qtyOrder != null ? qtyOrder.intValue() : 1;
+                                    int price = priceOrder != null ? priceOrder.intValue() : 0;
+
+                                    Orderdetails item = new Orderdetails(name, price, qty, img);
+                                    list.add(item);
+
+                                    // Khi load xong hết sản phẩm → trả về callback
+                                    if (list.size() == totalItems) {
+                                        callback.onProductsLoaded(list);
+                                    }
+
+                                });
+                    }
                 });
     }
 
+
     public interface OrderDetailCallback {
-        void onProductLoaded(Orderdetails orderdetails);
-        void onProductLoaded(OrderList orderList);
+        void onOrderInfoLoaded(OrderList orderList);
+        void onProductsLoaded(ArrayList<Orderdetails> list);
     }
 }

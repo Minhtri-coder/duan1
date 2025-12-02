@@ -54,20 +54,18 @@ public class Order_details_Fragment extends Fragment {
         }
         orderDao.getOrderDetails(orderid, new OrderDao.OrderDetailCallback() {
             @Override
-            public void onProductLoaded(Orderdetails orderdetails) {
-
-                list.clear();
-                list.add(orderdetails);
-                orderDetailsAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onProductLoaded(OrderList orderList) {
+            public void onOrderInfoLoaded(OrderList orderList) {
                 txtOrderId.setText(orderList.getOrderID());
                 txtDate.setText(orderList.getCreatAt());
                 txtTotal.setText(String.valueOf(orderList.getTotal()));
             }
 
+            @Override
+            public void onProductsLoaded(ArrayList<Orderdetails> list2) {
+                list.clear();
+                list.addAll(list2);
+                orderDetailsAdapter.notifyDataSetChanged();
+            }
         });
     }
 }
