@@ -44,56 +44,80 @@ public class OrderDao {
                     }
                 });
     }
-    public void getOrderDetails(String orderId, OrderDetailCallback callback) {
-        db.collection("orderDetails")
-                .whereEqualTo("orderID", orderId)
-                .get()
-                .addOnSuccessListener(orderDetailsSnap -> {
 
-                    if (orderDetailsSnap.isEmpty()) {
-                        callback.onProductsLoaded(new ArrayList<>());
+
+
+    public void getOrderDetails(String orderID, OrderDetailCallback callback) {
+
+        // 1. Load orderList từ bảng orders
+        db.collection("orders")
+                .document(orderID)
+                .get()
+                .addOnSuccessListener(orderSnap -> {
+
+                    OrderList orderList = orderSnap.toObject(OrderList.class);
+
+                    if (orderList == null) {
+                        callback.onProductsLoaded(null, new ArrayList<>());
                         return;
                     }
 
-                    ArrayList<Orderdetails> list = new ArrayList<>();
-                    int totalItems = orderDetailsSnap.size();
+                    // 2. Load orderDetails
+                    db.collection("orderDetails")
+                            .whereEqualTo("orderID", orderID)
+                            .get()
+                            .addOnSuccessListener(detailsSnap -> {
 
-                    for (DocumentSnapshot detailDoc : orderDetailsSnap.getDocuments()) {
+                                if (detailsSnap.isEmpty()) {
+                                    callback.onProductsLoaded(orderList, new ArrayList<>());
+                                    return;
+                                }
 
-                        String productId = detailDoc.getString("productId");
-                        Long qtyOrder = detailDoc.getLong("quantity");
-                        Double priceOrder = detailDoc.getDouble("price");
+                                ArrayList<Orderdetails> items = new ArrayList<>();
+                                int totalItems = detailsSnap.size();
 
-                        // Load thông tin sản phẩm
-                        db.collection("products")
-                                .document(productId)
-                                .get()
-                                .addOnSuccessListener(productSnap -> {
+                                for (DocumentSnapshot d : detailsSnap) {
 
-                                    String name = productSnap.getString("productName");
-                                    String img = productSnap.getString("productImage");
+                                    String productId = d.getString("productId");
+                                    Long qty = d.getLong("quantity");
+                                    Double price = d.getDouble("price");
 
-                                    int qty = qtyOrder != null ? qtyOrder.intValue() : 1;
-                                    int price = priceOrder != null ? priceOrder.intValue() : 0;
+                                    db.collection("products")
+                                            .document(productId)
+                                            .get()
+                                            .addOnSuccessListener(productSnap -> {
 
-                                    Orderdetails item = new Orderdetails(name, price, qty, img);
-                                    list.add(item);
+                                                String name = productSnap.getString("productName");
+                                                String img = productSnap.getString("productImage");
 
-                                    // Khi load xong hết sản phẩm → trả về callback
-                                    if (list.size() == totalItems) {
-                                        callback.onProductsLoaded(list);
-                                    }
+                                                Orderdetails item = new Orderdetails(
+                                                        name,
+                                                        price != null ? price.intValue() : 0,
+                                                        qty != null ? qty.intValue() : 1,
+                                                        img
+                                                );
 
-                                });
-                    }
+                                                items.add(item);
+
+                                                // Nếu load xong hết → trả callback chung
+                                                if (items.size() == totalItems) {
+                                                    callback.onProductsLoaded(orderList, items);
+                                                }
+                                            });
+                                }
+                            });
                 });
     }
 
 
+
     public interface OrderDetailCallback {
 
-        void onProductsLoaded(ArrayList<Orderdetails> list);
+        void onProductsLoaded(OrderList orderInfo,ArrayList<Orderdetails> list);
+
     }
+
+
 }
 
 

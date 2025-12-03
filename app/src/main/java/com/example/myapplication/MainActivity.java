@@ -63,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
         framecontent = findViewById(R.id.framecontent);
         replaceFragment(new Home_Fragment());
 
-        // ✅ GIỎ HÀNG + BADGE TRÊN TOOLBAR
-        btn_cart = findViewById(R.id.btn_cart);
         txtCartBadge = findViewById(R.id.txtCartBadge);
 
         String userId = getSharedPreferences("USER", MODE_PRIVATE).getString("userId", "guest");
@@ -89,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
         bon.setOnNavigationItemSelectedListener(item -> {
             Fragment fragment = null;
             int id = item.getItemId();
-
             if (id == R.id.home) {
                 fragment = new Home_Fragment();
             } else if (id == R.id.product) {
