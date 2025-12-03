@@ -13,9 +13,12 @@ import android.widget.TextView;
 
 import com.example.myapplication.Adapter.OrderDetailsAdapter;
 import com.example.myapplication.DAO.OrderDao;
+import com.example.myapplication.Model.OrderList;
 import com.example.myapplication.Model.Orderdetails;
 import com.example.myapplication.R;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 
@@ -52,13 +55,20 @@ public class Order_details_Fragment extends Fragment {
         if (bundle != null) {
             orderid = bundle.getString("orderid");
         }
-        orderDao.getOrderDetails(orderid, new OrderDao.OrderDetailCallback() {
-            @Override
-            public void onProductsLoaded(ArrayList<Orderdetails> list2) {
-                list.clear();
-                list.addAll(list2);
-                orderDetailsAdapter.notifyDataSetChanged();
-            }
-        });
+      orderDao.getOrderDetails(orderid, new OrderDao.OrderDetailCallback() {
+          @Override
+          public void onProductsLoaded(OrderList orderInfo, ArrayList<Orderdetails> list2) {
+              txtOrderId.setText(orderInfo.getOrderID());
+              txtDate.setText(orderInfo.getCreatAt());
+              NumberFormat numberFormat = new DecimalFormat("#,###");
+              String price = numberFormat.format(orderInfo.getTotal());
+              price = price.replace(",",".");
+              txtTotal.setText(price  + " đ");
+              list.clear();
+              list.addAll(list2);
+              orderDetailsAdapter.notifyDataSetChanged();
+          }
+      });
+
     }
 }

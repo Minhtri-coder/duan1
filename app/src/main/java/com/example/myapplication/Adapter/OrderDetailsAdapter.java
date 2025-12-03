@@ -42,8 +42,9 @@ public class OrderDetailsAdapter extends RecyclerView.Adapter<OrderDetailsAdapte
         holder.txtName.setText(orderdetails.getNameProduct());
         NumberFormat numberFormat = new DecimalFormat("#,###");
         String price = numberFormat.format(orderdetails.getPriceProduct());
-        holder.txtPrice.setText(price);
-        holder.txtQuantity.setText(String.valueOf(orderdetails.getQuantityProduct()));
+        price = price.replace(",",".");
+        holder.txtPrice.setText(price + "đ");
+        holder.txtQuantity.setText("quanlity:" +orderdetails.getQuantityProduct());
         Glide.with(context)
                 .load(orderdetails.getImgProduct())
                 .placeholder(R.drawable.bench)

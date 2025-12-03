@@ -41,12 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end">
 
-                <ImageButton
-                    android:id="@+id/btn_cart"
-                    android:layout_width="20dp"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_cart" />
+
 
                 <TextView
                     android:id="@+id/txtCartBadge"
