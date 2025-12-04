@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.myapplication.Adapter.OrderDetailsAdapter;
@@ -28,6 +29,7 @@ public class Order_details_Fragment extends Fragment {
     private LinearLayoutManager linearLayoutManager;
     private ArrayList<Orderdetails> list;
     TextView txtOrderId, txtDate ,txtTotal;
+    Button btnBackhome;
     private OrderDetailsAdapter orderDetailsAdapter;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,6 +39,20 @@ public class Order_details_Fragment extends Fragment {
         txtOrderId = view.findViewById(R.id.txtOrderNumber);
         txtDate = view.findViewById(R.id.txtOrderDate);
         txtTotal = view.findViewById(R.id.txtTotalAmount);
+        btnBackhome = view.findViewById(R.id.btnComebackHome);
+        btnBackhome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragmentHome = new Home_Fragment();
+
+                requireActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.framecontent,fragmentHome)
+                        .commit();
+
+            }
+        });
         RecyclerView recOrderDetails = view.findViewById(R.id.recOrderDetails);
         orderDao = new OrderDao();
         list = new ArrayList<>();

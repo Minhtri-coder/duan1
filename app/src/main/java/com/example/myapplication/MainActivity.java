@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bon;
     FrameLayout framecontent;
 
-    ImageButton btn_cart;
+
     TextView txtCartBadge;
 
     CartManager cartManager;
@@ -72,10 +72,7 @@ public class MainActivity extends AppCompatActivity {
 //        updateCartBadge();
         updateCartBadge();
 
-        // ✅ BẤM GIỎ TRÊN TOOLBAR → MỞ CART
-        btn_cart.setOnClickListener(v -> {
-            startActivity(new Intent(this, CartActivity.class));
-        });
+
 
         // ✅ BOTTOM NAVIGATION
         bon = findViewById(R.id.bottomNavigation);
