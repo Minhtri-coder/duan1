@@ -10,6 +10,7 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
         jcenter()
+        maven {  url = uri("https://jitpack.io")}
     }
 }
 dependencyResolutionManagement {
@@ -21,6 +22,7 @@ dependencyResolutionManagement {
         flatDir {
             dirs("libs")  // chú ý phải dùng dấu ngoặc kép
         }
+        maven { url = uri("https://jitpack.io") }
     }
 }
 

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Admin.Custom_statistics_Fragment"
+    android:fillViewport="true"
     android:background="@color/white">
 
-    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
 
@@ -120,7 +119,7 @@
                 android:background="@drawable/bg_stat_box"
                 android:orientation="vertical"
                 android:padding="16dp"
-                >
+               >
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -199,5 +198,4 @@
 
     </LinearLayout>
 
-
-</FrameLayout>
+</ScrollView>

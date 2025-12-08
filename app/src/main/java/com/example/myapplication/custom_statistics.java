@@ -1,16 +1,12 @@
-package com.example.myapplication.Admin;
+package com.example.myapplication;
 
 import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.myapplication.R;
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -26,30 +22,26 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Custom_statistics_Fragment extends Fragment {
+public class custom_statistics extends AppCompatActivity {
+
     TextView txttotalRevenue, txttotal_sale, txttotal_customer, txttotal_order;
     BarChart bar_chart;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_custom_statistics);
 
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_custom_statistics_, container, false);
-        txttotalRevenue = view.findViewById(R.id.txttotalRevenue);
-        txttotal_sale = view.findViewById(R.id.txttotal_sale);
-        txttotal_customer = view.findViewById(R.id.txttotal_customer);
-        txttotal_order = view.findViewById(R.id.txttotal_order);
-        bar_chart = view.findViewById(R.id.bar_chart);
+        txttotalRevenue = findViewById(R.id.txttotalRevenue);
+        txttotal_sale = findViewById(R.id.txttotal_sale);
+        txttotal_customer = findViewById(R.id.txttotal_customer);
+        txttotal_order = findViewById(R.id.txttotal_order);
+        bar_chart = findViewById(R.id.bar_chart);
 
         loadStatistics();
-        return view;
     }
+
     private void loadStatistics() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
