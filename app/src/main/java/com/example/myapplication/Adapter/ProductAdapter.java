@@ -19,6 +19,7 @@ import com.example.myapplication.CartManager;
 import com.example.myapplication.Model.CartItem;
 import com.example.myapplication.Model.Product;
 import com.example.myapplication.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -40,8 +41,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.viewhold
         this.context = context;
         this.onProductClickListener = onProductClickListener;
 
-        String userId = context.getSharedPreferences("USER", Context.MODE_PRIVATE)
-                .getString("userId", "guest");
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
 
         this.cartManager = new CartManager(context, userId);
     }

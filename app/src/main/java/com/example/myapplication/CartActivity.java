@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.Adapter.CartAdapter;
 import com.example.myapplication.Model.CartItem;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.text.NumberFormat;
@@ -35,8 +36,7 @@ public class CartActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);   // ✅ NÚT BACK
         btncheckout= findViewById(R.id.btnCheckout);
         btnBack = findViewById(R.id.btnBack);
-        String userId = getSharedPreferences("USER", MODE_PRIVATE)
-                .getString("userId", "guest");
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         cartManager = new CartManager(this, userId);
         cartList = cartManager.getCart();
