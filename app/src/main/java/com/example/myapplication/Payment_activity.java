@@ -233,9 +233,6 @@ public class Payment_activity extends AppCompatActivity {
                                     editor.clear();
                                     editor.apply();
                                     // send mail
-
-
-
                                     String subject = "Cảm ơn bạn đã đặt hàng tại MyShop!";
                                     String message = "<!DOCTYPE html>" +
                                             "<html>" +

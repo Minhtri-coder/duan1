@@ -20,6 +20,7 @@ import com.example.myapplication.DAO.ProductDao;
 import com.example.myapplication.Model.CartItem;
 import com.example.myapplication.Model.Product;
 import com.example.myapplication.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -135,9 +136,7 @@ public class ProductDetails_Fragment extends Fragment {
                     currentProduct.getProductImage()   // image
             );
 
-            String userId = requireContext()
-                    .getSharedPreferences("USER", Context.MODE_PRIVATE)
-                    .getString("userId", "guest");
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
             CartManager cartManager = new CartManager(requireContext(), userId);
             LocalBroadcastManager.getInstance(requireContext())
