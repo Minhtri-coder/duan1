@@ -17,6 +17,13 @@ public class CartItem {
         this.image = image;
     }
 
+    public CartItem(String name, double price, int quantity, String image) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.image = image;
+    }
+
     public String getProductId() {
         return productId;
     }

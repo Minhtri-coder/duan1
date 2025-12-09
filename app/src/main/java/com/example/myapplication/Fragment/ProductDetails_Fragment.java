@@ -139,9 +139,10 @@ public class ProductDetails_Fragment extends Fragment {
             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
             CartManager cartManager = new CartManager(requireContext(), userId);
-            LocalBroadcastManager.getInstance(requireContext())
-                    .sendBroadcast(new Intent("UPDATE_BADGE"));
+
             cartManager.addToCart(cartItem);
+            LocalBroadcastManager.getInstance(requireContext())
+            .sendBroadcast(new Intent("UPDATE_BADGE"));
 
             Toast.makeText(getContext(), "✅ Đã thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
         });
