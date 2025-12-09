@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.Adapter.CartAdapter;
@@ -44,6 +45,8 @@ public class CartActivity extends AppCompatActivity {
         adapter = new CartAdapter(this, cartList, () -> {
             cartManager.saveCart(cartList);
             updateSubtotal();
+            LocalBroadcastManager.getInstance(CartActivity.this)
+                    .sendBroadcast(new Intent("UPDATE_BADGE"));
         });
 
         rcvCart.setLayoutManager(new LinearLayoutManager(this));
@@ -59,7 +62,7 @@ public class CartActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(CartActivity.this, Payment_activity.class);
                 intent.putExtra("tongtien", txtSubtotal.getText().toString());
-                // ✅ Gửi cả danh sách CartItem
+                // ✅ Gửi cả danh sách CartItemxx
                 intent.putExtra("cartList", new Gson().toJson(cartList));
                 startActivity(intent);
             }
@@ -75,4 +78,6 @@ public class CartActivity extends AppCompatActivity {
         NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
         txtSubtotal.setText(formatter.format(total) + " ₫");
     }
+
+
 }
