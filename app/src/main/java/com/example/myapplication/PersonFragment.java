@@ -1,53 +1,62 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RelativeLayout;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import com.example.myapplication.R;
-import android.widget.TextView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class PersonFragment extends Fragment {
 
-    TextView txtName, txtLogout;
-    LinearLayout btnAccount, btnUpdate, btnChangePass;
+    RelativeLayout btnInfo, btnUpdate, btnChangePass;
+    Button btnLogout;
+
+    FirebaseAuth auth;
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_person, container, false);
 
-        txtName = view.findViewById(R.id.txtName);
-        txtLogout = view.findViewById(R.id.txtLogout);
-
-        btnAccount = view.findViewById(R.id.btnAccount);
+        // ✅ Ánh xạ đúng ID từ XML của bạn
+        btnInfo = view.findViewById(R.id.btnInfo);
         btnUpdate = view.findViewById(R.id.btnUpdate);
         btnChangePass = view.findViewById(R.id.btnChangePass);
+        btnLogout = view.findViewById(R.id.btnLogout);
 
-        // TÊN NGƯỜI DÙNG -> sau này bạn lấy từ Firebase
-        txtName.setText("Trương Nguyên Quỳnh Nhân");
+        auth = FirebaseAuth.getInstance();
 
-        // Các nút bấm
-        btnAccount.setOnClickListener(v -> {
-            // Code mở trang Tài khoản
-        });
+        // ✅ Xem thông tin tài khoản
+        btnInfo.setOnClickListener(v ->
+                startActivity(new Intent(getActivity(), ViewAccountActivity.class))
+        );
 
-        btnUpdate.setOnClickListener(v -> {
-            // Code mở trang cập nhật thông tin
-        });
+        // ✅ Cập nhật thông tin
+        btnUpdate.setOnClickListener(v ->
+                startActivity(new Intent(getActivity(), UpdateAccountActivity.class))
+        );
 
-        btnChangePass.setOnClickListener(v -> {
-            // Code mở trang đổi mật khẩu
-        });
+        // ✅ Đổi mật khẩu
+        btnChangePass.setOnClickListener(v ->
+                startActivity(new Intent(getActivity(), ChangePasswordActivity.class))
+        );
 
-        txtLogout.setOnClickListener(v -> {
-            // FirebaseAuth.getInstance().signOut();
-            // Chuyển về màn hình Login
+        // ✅ Đăng xuất
+        btnLogout.setOnClickListener(v -> {
+            auth.signOut();
+            startActivity(new Intent(getActivity(), LoginActivity.class));
+            requireActivity().finish();
         });
 
         return view;
