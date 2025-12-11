@@ -65,6 +65,7 @@ public class productAdminTestFragment extends Fragment {
         EditText edtQuantity = view.findViewById(R.id.edtQuantityProduct);
         EditText edtImage = view.findViewById(R.id.edtImgProduct);
         EditText edtDec = view.findViewById(R.id.edtDescriptionProduct);
+        EditText edtCateId = view.findViewById(R.id.edtCateID);
         Button btnAdd = view.findViewById(R.id.btnAddProduct);
         builder.setView(view);
         AlertDialog dialog = builder.create();
@@ -77,8 +78,9 @@ public class productAdminTestFragment extends Fragment {
                 String quantity = edtQuantity.getText().toString();
                 String image = edtImage.getText().toString();
                 String dec = edtDec.getText().toString();
+                String cateID = edtCateId.getText().toString();
                 Product product = new Product(name,Integer.parseInt(price),Integer.parseInt(quantity),image,dec);
-                productDao.Addproduct(product);
+                productDao.Addproduct(product,cateID);
                 loadproduct();
                 dialog.dismiss();
             }

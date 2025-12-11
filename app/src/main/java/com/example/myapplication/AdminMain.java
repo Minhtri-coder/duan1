@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.Admin.Custom_statistics_Fragment;
+import com.example.myapplication.Fragment.CategoryFragment;
 import com.example.myapplication.Fragment.Person_Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -27,21 +28,25 @@ public class AdminMain extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_admin);
         framecontent= findViewById(R.id.framecontent);
-        replaceFragment(new productAdminTestFragment());
+        replaceFragment(new CategoryFragment());
         btnadmin= findViewById(R.id.bottomNavigation_admin);
         btnadmin.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Fragment fragment = new productAdminTestFragment();
+                Fragment fragment = new CategoryFragment();
                 int id=item.getItemId();
-                 if (id== R.id.product) {
-                    fragment= new productAdminTestFragment();
+                 if (id== R.id.category) {
+                    fragment= new CategoryFragment();
                ;
-                } else if (id== R.id.product_statistics) {
+                } else if (id== R.id.product) {
 
-                    fragment= new Product_statistics_Fragment();
+                     fragment= new productAdminTestFragment();
 
-                }
+                }else if (id== R.id.product_statistics) {
+
+                     fragment= new Product_statistics_Fragment();
+
+                 }
                 else if(id == R.id.user_statistics){
                     fragment = new Custom_statistics_Fragment();
 
