@@ -37,14 +37,16 @@ public class ProductDao {
                     }
                 });
     }
-    public void Addproduct(Product product){
+    public void Addproduct(Product product, String cateId){
         DocumentReference documentReference = db.collection("products").document();
         product.setProductId(documentReference.getId());
+        product.setCategoryId(cateId);
         documentReference.set(product);
     }
 
-    public void UpdateProduct(String productID,Product product){
+    public void UpdateProduct(String productID,Product product,String cateId){
 //        db.collection("products").document(productID).set(product);
+        product.setCategoryId(cateId);
         product.setProductId(productID);
         db.collection("products").document(productID).set(product, SetOptions.merge());
 

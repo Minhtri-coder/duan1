@@ -15,7 +15,7 @@ import com.example.myapplication.Adapter.CategoryAdapter;
 import com.example.myapplication.Adapter.ProductAdapter_home;
 import com.example.myapplication.DAO.ProductDao;
 import com.example.myapplication.Model.Product;
-import com.example.myapplication.Model.item_category;
+import com.example.myapplication.Model.Category;
 import com.example.myapplication.R;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class Home_Fragment extends Fragment {
     RecyclerView recCategory, recProduct;
-    ArrayList<item_category> ListCate;
+    ArrayList<Category> ListCate;
     private ArrayList<Product> listProduct;
     private ProductDao productDao;
     private ProductAdapter_home productAdapter;
@@ -46,11 +46,11 @@ public class Home_Fragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(requireContext(), 5);
         recCategory.setLayoutManager(gridLayoutManager);
         ListCate = new ArrayList<>();
-        ListCate.add(new item_category( "Sofa"));
-        ListCate.add(new item_category( "Ghế"));
-        ListCate.add(new item_category("Giường"));
-        ListCate.add(new item_category("Bàn"));
-        ListCate.add(new item_category("Đèn"));
+        ListCate.add(new Category( "Sofa"));
+        ListCate.add(new Category( "Ghế"));
+        ListCate.add(new Category("Giường"));
+        ListCate.add(new Category("Bàn"));
+        ListCate.add(new Category("Đèn"));
         categoryAdapter = new CategoryAdapter(requireContext(), ListCate);
         categoryAdapter = new CategoryAdapter(ListCate, requireContext(), categoryName -> {
                     filterCategoryFromFirebase(categoryName);

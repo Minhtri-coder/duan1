@@ -16,58 +16,30 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Thêm sản phẩm"
+            android:text="Thêm danh mục"
             android:textSize="30dp"
             android:textStyle="bold"
             android:gravity="center"
             android:layout_marginTop="20dp"/>
 
-
-
-        <EditText
-            android:id="@+id/edtNameProduct"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tên sản phẩm"/>
-
-
-
-        <EditText
-            android:id="@+id/edtPriceProduct"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Giá sản phẩm"/>
-
-
+            android:text="Tên danh mục"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            />
 
         <EditText
-            android:id="@+id/edtQuantityProduct"
+            android:id="@+id/edtNameCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Số lượng sản phẩm"/>
+            android:hint="Tên danh mục"/>
 
-
-
-        <EditText
-            android:id="@+id/edtDescriptionProduct"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Mô tả"/>
-
-
-        <EditText
-            android:id="@+id/edtImgProduct"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Hình ảnh"/>
-        <EditText
-            android:id="@+id/edtCateID"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="CateID"/>
 
         <Button
-            android:id="@+id/btnAddProduct"
+            android:id="@+id/btnAddCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/green"
@@ -75,7 +47,7 @@
             android:layout_marginTop="10dp"/>
 
         <Button
-            android:id="@+id/btnCancelProduct"
+            android:id="@+id/btnCancelCategory"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/gray"
