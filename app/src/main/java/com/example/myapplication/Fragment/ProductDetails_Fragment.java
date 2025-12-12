@@ -3,7 +3,6 @@ package com.example.myapplication.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -21,6 +20,7 @@ import com.example.myapplication.DAO.ProductDao;
 import com.example.myapplication.Model.CartItem;
 import com.example.myapplication.Model.Product;
 import com.example.myapplication.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -32,9 +32,8 @@ public class ProductDetails_Fragment extends Fragment {
     Button addToCartButton;
 
     ProductDao productDao;
-
-    private Product currentProduct;   // ✅ CHỈ KHAI BÁO 1 LẦN DUY NHẤT
-    int quantity = 1;                 // ✅ SỐ LƯỢNG BAN ĐẦU
+    Product currentProduct;   // ✅ LƯU SẢN PHẨM ĐANG XEM
+    int quantity = 1;         // ✅ SỐ LƯỢNG BAN ĐẦU
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -77,10 +76,9 @@ public class ProductDetails_Fragment extends Fragment {
         productDao.getProduct(productid, new ProductDao.OnProductLoadedListener() {
             @Override
             public void onloaded(Product product) {
+                currentProduct = product;
 
-                currentProduct = product;   // ✅ LƯU SẢN PHẨM ĐANG XEM
-
-                Glide.with(requireContext())
+                Glide.with(getContext())
                         .load(product.getProductImage())
                         .placeholder(R.drawable.bench)
                         .error(R.drawable.bench)
@@ -90,7 +88,8 @@ public class ProductDetails_Fragment extends Fragment {
                 txtDec.setText(product.getProductDescription());
 
                 NumberFormat numberFormat = new DecimalFormat("#,###");
-                String price = numberFormat.format(product.getPrice()).replace(",", ".");
+                String price = numberFormat.format(product.getPrice());
+                price = price.replace(",", ".");
                 txtPrice.setText(price + " ₫");
             }
 
@@ -130,23 +129,20 @@ public class ProductDetails_Fragment extends Fragment {
             }
 
             CartItem cartItem = new CartItem(
-                    currentProduct.getProductId(),     // ✅ ĐÚNG CHUẨN ID
-                    currentProduct.getProductName(),
-                    currentProduct.getPrice(),
-                    quantity,
-                    currentProduct.getProductImage()
+                    currentProduct.getProductId(),
+                    currentProduct.getProductName(),   // name
+                    currentProduct.getPrice(),         // price
+                    quantity,                          // ✅ SỐ LƯỢNG ĐÃ CHỌN
+                    currentProduct.getProductImage()   // image
             );
 
-            String userId = requireContext()
-                    .getSharedPreferences("USER", Context.MODE_PRIVATE)
-                    .getString("userId", "guest");
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
             CartManager cartManager = new CartManager(requireContext(), userId);
-            cartManager.addToCart(cartItem);
 
-            // ✅ GỬI BROADCAST UPDATE BADGE
+            cartManager.addToCart(cartItem);
             LocalBroadcastManager.getInstance(requireContext())
-                    .sendBroadcast(new Intent("UPDATE_BADGE"));
+            .sendBroadcast(new Intent("UPDATE_BADGE"));
 
             Toast.makeText(getContext(), "✅ Đã thêm vào giỏ hàng!", Toast.LENGTH_SHORT).show();
         });

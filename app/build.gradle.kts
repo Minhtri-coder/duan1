@@ -29,6 +29,18 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    // ⭐ FIX LỖI TRÙNG FILE META-INF ⭐
+    packaging {
+        resources {
+            excludes += setOf(
+                "META-INF/LICENSE.md",
+                "META-INF/LICENSE.txt",
+                "META-INF/NOTICE.md",
+                "META-INF/NOTICE.txt"
+            )
+        }
+    }
+
 }
 
 dependencies {
@@ -43,6 +55,7 @@ dependencies {
         "include" to listOf("*.aar", "*.jar"),
         "exclude" to listOf("")
     )))
+    implementation(libs.firebase.database)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -66,5 +79,10 @@ dependencies {
     // zalo pay
     implementation("com.squareup.okhttp3:okhttp:4.6.0")
     implementation("commons-codec:commons-codec:1.14")
-// kiểm tra version mới nhất trên docs
+    // mail
+    implementation("com.sun.mail:android-mail:1.6.7")
+    implementation("com.sun.mail:android-activation:1.6.7")
+    implementation(files("libs/zpdk-release-v3.1.aar"))
+    // bieu do
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }

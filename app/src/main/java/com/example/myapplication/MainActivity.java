@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bon;
     FrameLayout framecontent;
 
-    ImageButton btn_cart;
+
     TextView txtCartBadge;
 
     CartManager cartManager;
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private final BroadcastReceiver bagRecevier = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            updateCartBadge();
+//            updateCartBadge();
         }
     };
 
@@ -63,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
         framecontent = findViewById(R.id.framecontent);
         replaceFragment(new Home_Fragment());
 
-        // ✅ GIỎ HÀNG + BADGE TRÊN TOOLBAR
-        btn_cart = findViewById(R.id.btn_cart);
         txtCartBadge = findViewById(R.id.txtCartBadge);
 
         String userId = getSharedPreferences("USER", MODE_PRIVATE).getString("userId", "guest");
@@ -72,12 +70,9 @@ public class MainActivity extends AppCompatActivity {
         cartManager = new CartManager(this, userId);
 
 //        updateCartBadge();
-        updateCartBadge();
+//        updateCartBadge();
 
-        // ✅ BẤM GIỎ TRÊN TOOLBAR → MỞ CART
-        btn_cart.setOnClickListener(v -> {
-            startActivity(new Intent(this, CartActivity.class));
-        });
+
 
         // ✅ BOTTOM NAVIGATION
         bon = findViewById(R.id.bottomNavigation);
@@ -89,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
         bon.setOnNavigationItemSelectedListener(item -> {
             Fragment fragment = null;
             int id = item.getItemId();
-
             if (id == R.id.home) {
                 fragment = new Home_Fragment();
             } else if (id == R.id.product) {
@@ -113,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        updateCartBadge();
+//        updateCartBadge();
     }
 
     @Override
@@ -124,30 +118,30 @@ public class MainActivity extends AppCompatActivity {
 
 
     // ✅ CẬP NHẬT BADGE
-    private void updateCartBadge() {
-        int total = cartManager.getTotalQuantity();
-        if (cartBadge == null) return;
-        if (total > 0) {
-//            txtCartBadge.setText(String.valueOf(total));
-//            txtCartBadge.setVisibility(TextView.VISIBLE);
-            cartBadge.setVisible(true);
-            cartBadge.setNumber(total);
-//            // ✅ ANIMATION NHẢY
-//            ScaleAnimation scaleAnimation = new ScaleAnimation(
-//                    0.7f, 1.1f,
-//                    0.7f, 1.1f,
-//                    Animation.RELATIVE_TO_SELF, 0.5f,
-//                    Animation.RELATIVE_TO_SELF, 0.5f
-//            );
-//            scaleAnimation.setDuration(200);
-//            txtCartBadge.startAnimation(scaleAnimation);
-
-        } else {
-//            txtCartBadge.setVisibility(TextView.GONE);
-            cartBadge.clearNumber();
-            cartBadge.setVisible(false);
-        }
-    }
+//    private void updateCartBadge() {
+//        int total = cartManager.getTotalQuantity();
+//        if (cartBadge == null) return;
+//        if (total > 0) {
+////            txtCartBadge.setText(String.valueOf(total));
+////            txtCartBadge.setVisibility(TextView.VISIBLE);
+//            cartBadge.setVisible(true);
+//            cartBadge.setNumber(total);
+////            // ✅ ANIMATION NHẢY
+////            ScaleAnimation scaleAnimation = new ScaleAnimation(
+////                    0.7f, 1.1f,
+////                    0.7f, 1.1f,
+////                    Animation.RELATIVE_TO_SELF, 0.5f,
+////                    Animation.RELATIVE_TO_SELF, 0.5f
+////            );
+////            scaleAnimation.setDuration(200);
+////            txtCartBadge.startAnimation(scaleAnimation);
+//
+//        } else {
+////            txtCartBadge.setVisibility(TextView.GONE);
+//            cartBadge.clearNumber();
+//            cartBadge.setVisible(false);
+//        }
+//    }
 
 
     // ✅ HÀM LOAD FRAGMENT

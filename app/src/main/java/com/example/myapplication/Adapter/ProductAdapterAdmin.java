@@ -68,6 +68,7 @@ public class ProductAdapterAdmin extends RecyclerView.Adapter<ProductAdapterAdmi
                 EditText edtQuantity = view1.findViewById(R.id.edtQuantityProduct);
                 EditText edtImage = view1.findViewById(R.id.edtImgProduct);
                 EditText edtDec = view1.findViewById(R.id.edtDescriptionProduct);
+                EditText edtCate = view1.findViewById(R.id.edtCateID);
                 edtName.setText(product.getProductName());
                 NumberFormat numberFormat = new DecimalFormat("#,###");
                 String price = numberFormat.format(product.getPrice());
@@ -75,6 +76,7 @@ public class ProductAdapterAdmin extends RecyclerView.Adapter<ProductAdapterAdmi
                 edtQuantity.setText(String.valueOf(product.getQuantity()));
                 edtImage.setText(product.getProductImage());
                 edtDec.setText(product.getProductDescription());
+                edtCate.setText(product.getCategoryId());
                 Button btnUpdate = view1.findViewById(R.id.btnUpdateProduct);
                 builder.setView(view1);
                 Dialog dialog = builder.create();
@@ -88,9 +90,10 @@ public class ProductAdapterAdmin extends RecyclerView.Adapter<ProductAdapterAdmi
                         String quantity = edtQuantity.getText().toString();
                         String image = edtImage.getText().toString();
                         String dec = edtDec.getText().toString();
+                        String cateId = edtCate.getText().toString();
                         Product product1 = new Product(name,Integer.parseInt(price),Integer.parseInt(quantity),image,dec);
                         productDao = new ProductDao();
-                        productDao.UpdateProduct(id,product1);
+                        productDao.UpdateProduct(id,product1,cateId);
                         loadProduct2();
                         dialog.dismiss();
                     }

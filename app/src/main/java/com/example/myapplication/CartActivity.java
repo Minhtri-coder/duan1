@@ -6,11 +6,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.Adapter.CartAdapter;
 import com.example.myapplication.Model.CartItem;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.text.NumberFormat;
@@ -35,8 +37,7 @@ public class CartActivity extends AppCompatActivity {
         btnBack = findViewById(R.id.btnBack);   // ✅ NÚT BACK
         btncheckout= findViewById(R.id.btnCheckout);
         btnBack = findViewById(R.id.btnBack);
-        String userId = getSharedPreferences("USER", MODE_PRIVATE)
-                .getString("userId", "guest");
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         cartManager = new CartManager(this, userId);
         cartList = cartManager.getCart();
@@ -44,6 +45,8 @@ public class CartActivity extends AppCompatActivity {
         adapter = new CartAdapter(this, cartList, () -> {
             cartManager.saveCart(cartList);
             updateSubtotal();
+            LocalBroadcastManager.getInstance(CartActivity.this)
+                    .sendBroadcast(new Intent("UPDATE_BADGE"));
         });
 
         rcvCart.setLayoutManager(new LinearLayoutManager(this));
@@ -57,8 +60,10 @@ public class CartActivity extends AppCompatActivity {
         btncheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent= new Intent(CartActivity.this,Payment_activity.class);
+                Intent intent = new Intent(CartActivity.this, Payment_activity.class);
                 intent.putExtra("tongtien", txtSubtotal.getText().toString());
+                // ✅ Gửi cả danh sách CartItemxx
+                intent.putExtra("cartList", new Gson().toJson(cartList));
                 startActivity(intent);
             }
         });
@@ -73,4 +78,6 @@ public class CartActivity extends AppCompatActivity {
         NumberFormat formatter = NumberFormat.getInstance(new Locale("vi", "VN"));
         txtSubtotal.setText(formatter.format(total) + " ₫");
     }
+
+
 }

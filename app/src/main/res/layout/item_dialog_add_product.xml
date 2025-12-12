@@ -22,14 +22,7 @@
             android:gravity="center"
             android:layout_marginTop="20dp"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tên sản phẩm"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp"
-            />
+
 
         <EditText
             android:id="@+id/edtNameProduct"
@@ -37,14 +30,7 @@
             android:layout_height="wrap_content"
             android:hint="Tên sản phẩm"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Giá sản phẩm"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp"
-            />
+
 
         <EditText
             android:id="@+id/edtPriceProduct"
@@ -52,14 +38,7 @@
             android:layout_height="wrap_content"
             android:hint="Giá sản phẩm"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Số Lượng"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp"
-            />
+
 
         <EditText
             android:id="@+id/edtQuantityProduct"
@@ -67,34 +46,25 @@
             android:layout_height="wrap_content"
             android:hint="Số lượng sản phẩm"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mô Tả"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp"
-            />
+
 
         <EditText
             android:id="@+id/edtDescriptionProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Mô tả"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Hình Ảnh"
-            android:textSize="18dp"
-            android:textStyle="bold"
-            android:layout_marginTop="20dp"
-            />
+
 
         <EditText
             android:id="@+id/edtImgProduct"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Hình ảnh"/>
+        <EditText
+            android:id="@+id/edtCateID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="CateID"/>
 
         <Button
             android:id="@+id/btnAddProduct"

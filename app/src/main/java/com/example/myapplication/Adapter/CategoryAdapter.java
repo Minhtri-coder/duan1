@@ -2,37 +2,30 @@ package com.example.myapplication.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-
-import com.example.myapplication.Model.item_category;
+import com.example.myapplication.Model.Category;
 import com.example.myapplication.R;
 
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewholder>{
-    private ArrayList<item_category>listCategory;
+    private ArrayList<Category>listCategory;
     private Context context;
     OnProductClickListener listener;
-    public CategoryAdapter( Context context,ArrayList<item_category> listCategory) {
+    public CategoryAdapter( Context context,ArrayList<Category> listCategory) {
         this.listCategory = listCategory;
         this.context = context;
     }
 
-    public CategoryAdapter(ArrayList<item_category> listCategory, Context context, OnProductClickListener listener) {
+    public CategoryAdapter(ArrayList<Category> listCategory, Context context, OnProductClickListener listener) {
         this.listCategory = listCategory;
         this.context = context;
         this.listener = listener;
@@ -48,8 +41,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewho
 
     @Override
     public void onBindViewHolder(@NonNull viewholder holder, int position) {
-        item_category product = listCategory.get(position);
-        holder.txtcate.setText(product.getName());
+        Category product = listCategory.get(position);
+        holder.txtcate.setText(product.getCategoryName());
         // set on click
         int posion = holder.getAdapterPosition();
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +50,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewho
             public void onClick(View view) {
 //                Toast.makeText(context, "vi tri"+posion+"ten"+product.getName(), Toast.LENGTH_SHORT).show();
                 if(posion !=RecyclerView.NO_POSITION){
-                    listener.onProductClick(product.getName());
+                    listener.onProductClick(product.getCategoryName());
                 }
             }
         });

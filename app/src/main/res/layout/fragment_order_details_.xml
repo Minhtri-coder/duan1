@@ -1,115 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragment.Order_details_Fragment"
-    android:orientation="vertical"
-    android:layout_margin="10dp">
+   >
 
-   <com.google.android.material.card.MaterialCardView
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       app:cardCornerRadius="10dp"
-       >
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="18dp"
-        android:background="@color/white">
-
-        <TextView
-            android:id="@+id/txtOrder1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Order Number"
-            android:textColor="#8C97A1"
-            android:textSize="15dp"
-            />
-
-        <TextView
-            android:id="@+id/txtOrderNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="#FURN10234"
-            android:textSize="15dp"
-            android:textStyle="bold"
-            android:textColor="#1A1A1A"
-            android:layout_alignParentEnd="true"
-            android:layout_alignBaseline="@id/txtOrder1"/>
-        <TextView
-            android:id="@+id/txtOrder2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Order Date"
-            android:textSize="15dp"
-            android:textColor="#8C97A1"
-            android:layout_marginTop="8dp"
-            android:layout_below="@id/txtOrder1"/>
-
-        <TextView
-            android:id="@+id/txtOrderDate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="October 26, 2023"
-            android:textSize="15dp"
-            android:textColor="@color/black"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/txtOrderNumber"
-            android:layout_alignBaseline="@id/txtOrder2"/>
-        <TextView
-            android:id="@+id/txtOrder3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Total Account"
-            android:layout_below="@id/txtOrder2"
-            android:textSize="15dp"
-            android:textColor="#8C97A1"
-            android:layout_marginTop="8dp"
-            />
-
-        <TextView
-            android:id="@+id/txtTotalAmount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="23.000.000"
-            android:textSize="15dp"
-            android:textColor="@color/black"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/txtOrderDate"
-            android:layout_alignBaseline="@id/txtOrder3"/>
-    </RelativeLayout>
-   </com.google.android.material.card.MaterialCardView>
-
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:cardCornerRadius="10dp"
-        >
-        <LinearLayout
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:padding="18dp"
-            android:orientation="vertical">
-            <TextView
+            app:cardCornerRadius="10dp"
+            >
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Items Orders"
-                android:textSize="20dp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                />
+                android:padding="18dp"
+                android:background="@color/white">
 
-            <androidx.recyclerview.widget.RecyclerView
+                <TextView
+                    android:id="@+id/txtOrder1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Order Number"
+                    android:textColor="#8C97A1"
+                    android:textSize="15dp"
+                    />
+
+                <TextView
+                    android:id="@+id/txtOrderNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#FURN10234"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    android:textColor="#1A1A1A"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignBaseline="@id/txtOrder1"/>
+                <TextView
+                    android:id="@+id/txtOrder2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Order Date"
+                    android:textSize="15dp"
+                    android:textColor="#8C97A1"
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@id/txtOrder1"/>
+
+                <TextView
+                    android:id="@+id/txtOrderDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="October 26, 2023"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/txtOrderNumber"
+                    android:layout_alignBaseline="@id/txtOrder2"/>
+                <TextView
+                    android:id="@+id/txtOrder3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Account"
+                    android:layout_below="@id/txtOrder2"
+                    android:textSize="15dp"
+                    android:textColor="#8C97A1"
+                    android:layout_marginTop="8dp"
+                    />
+
+                <TextView
+                    android:id="@+id/txtTotalAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="23.000.000"
+                    android:textSize="15dp"
+                    android:textColor="@color/black"
+                    android:layout_alignParentEnd="true"
+                    android:layout_below="@id/txtOrderDate"
+                    android:layout_alignBaseline="@id/txtOrder3"/>
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="10dp"
+            >
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"/>
-        </LinearLayout>
+                android:background="@color/white"
+                android:padding="18dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Items Orders"
+                    android:textSize="20dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recOrderDetails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"/>
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnComebackHome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Comeback home"
+            android:background="@drawable/border_button"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"/>
+    </LinearLayout>
 
 
-
-    </com.google.android.material.card.MaterialCardView>
-</LinearLayout>
+</ScrollView>
