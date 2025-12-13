@@ -3,12 +3,12 @@ package com.example.myapplication;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.app.AlertDialog;
+import android.widget.ProgressBar;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.button.MaterialButton;
@@ -20,7 +20,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText edtEmail, edtPassword;
     private MaterialButton btnLogin;
-    private TextView txtSignup,txtForgotPassword;
+    private TextView txtSignup, txtForgotPassword;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -38,18 +38,21 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         txtSignup = findViewById(R.id.txtSignup);
         txtForgotPassword = findViewById(R.id.txtForgotPassword);
-        // Đăng nhập
+
+        // đăng nhập
         btnLogin.setOnClickListener(v -> attemptLogin());
 
-        // Chuyển sang Register
+        // chuyển sang đăng ký
         txtSignup.setOnClickListener(v ->
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
 
+        // mở dialog quên mật khẩu
         txtForgotPassword.setOnClickListener(v -> showForgotPasswordDialog());
     }
 
     private void showForgotPasswordDialog() {
-        View view = getLayoutInflater().inflate(R.layout.dialog_password, null);
+
+        View view = getLayoutInflater().inflate(R.layout.dialog_forgot_password, null);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(view);
@@ -101,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+
     private void attemptLogin() {
 
         String email = edtEmail.getText().toString().trim();
@@ -111,24 +115,31 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        // Đăng nhập Firebase Auth
         mAuth.signInWithEmailAndPassword(email, pass)
                 .addOnSuccessListener(auth -> {
 
-                    // Lấy role trong Firestore
+                    // lấy role trong Firestore
                     db.collection("users")
                             .whereEqualTo("email", email)
                             .get()
                             .addOnSuccessListener(snapshot -> {
 
-                                String role = snapshot.getDocuments().get(0).getString("role");
+                                if (!snapshot.getDocuments().isEmpty()) {
 
-                                if ("admin".equals(role)) {
-                                    Toast.makeText(this, "Chào Admin!", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(this, AdminMain.class));
+                                    String role = snapshot.getDocuments().get(0).getString("role");
+
+                                    if ("admin".equals(role)) {
+                                        Toast.makeText(this, "Chào Admin!", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(this, AdminMain.class));
+                                    } else {
+                                        Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(this, MainActivity.class));
+                                    }
 
                                 } else {
-                                    Toast.makeText(this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(this,
+                                            "Đăng nhập thành công nhưng không tìm thấy vai trò!",
+                                            Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(this, MainActivity.class));
                                 }
 
