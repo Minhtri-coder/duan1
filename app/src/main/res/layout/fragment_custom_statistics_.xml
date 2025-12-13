@@ -184,8 +184,15 @@
                     android:textStyle="bold"
                     android:paddingTop="6dp"/>
             </LinearLayout>
-
         </GridLayout>
+        <Button
+            android:id="@+id/btnPickDate"
+            android:background="@color/black"
+            android:textColor="#C79D84"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:text="Chọn ngày thống kê"
+            android:layout_margin="12dp"/>
 
         <!-- ===== REVENUE OVER TIME ===== -->
         <com.github.mikephil.charting.charts.BarChart
