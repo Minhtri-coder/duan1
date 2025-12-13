@@ -41,6 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Xoá"
+        android:visibility="gone"
         android:backgroundTint="@color/red"
         android:textColor="#FFFFFF"
         android:layout_marginTop="8dp"
