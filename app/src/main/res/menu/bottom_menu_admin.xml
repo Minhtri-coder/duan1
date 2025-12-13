@@ -20,7 +20,10 @@
         android:title=""
         android:icon="@drawable/ic_customer_statistics"
         />
-
+    <item
+        android:id="@+id/bill_manager"
+        android:title=""
+        android:icon="@drawable/ic_oder_manage" />
     <item
         android:id="@+id/person"
         android:title=""

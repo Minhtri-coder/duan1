@@ -103,16 +103,6 @@
 
             </LinearLayout>
 
-            <!-- Button View Order -->
-            <Button
-                android:id="@+id/btnViewOrder"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:text="View Order Details"
-                android:layout_marginTop="30dp"
-                android:backgroundTint="#D6B38A"
-                android:textColor="#ffffff"
-                />
 
             <!-- Button Continue -->
             <Button

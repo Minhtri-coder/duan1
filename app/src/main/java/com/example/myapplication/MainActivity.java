@@ -6,8 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     BottomNavigationView bon;
     FrameLayout framecontent;
-
+    ImageButton btn_search;
 
     TextView txtCartBadge;
 
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        btn_search = findViewById(R.id.btn_search);
         // ✅ TOOLBAR
         toolbar = findViewById(R.id.toolbar);
 
@@ -100,6 +102,12 @@ public class MainActivity extends AppCompatActivity {
 
             if (fragment != null) replaceFragment(fragment);
             return true;
+        });
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showSearchView();
+            }
         });
     }
 
@@ -149,6 +157,37 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.framecontent, fragment);
         transaction.commit();
+    }
+    private void showSearchView() {
+        SearchView searchView = new SearchView(this);
+        searchView.setIconified(false);
+        searchView.setQueryHint("Tìm sản phẩm...");
+
+        // Xóa các view cũ trên toolbar rồi thêm SearchView
+        toolbar.removeAllViews();
+        toolbar.addView(searchView);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                sendQueryToProductFragment(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                sendQueryToProductFragment(newText);
+                return true;
+            }
+        });
+
+    }
+    private void sendQueryToProductFragment(String query) {
+        Product_Fragment fragment = new Product_Fragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("searchQuery", query);
+        fragment.setArguments(bundle);
+        replaceFragment(fragment);
     }
 
 

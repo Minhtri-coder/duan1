@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myapplication.Fragment.Home_Fragment;
+import com.example.myapplication.Fragment.Order_details_Fragment;
 
 public class payment_succesful extends AppCompatActivity {
     TextView txtresult,txtamount;
@@ -25,6 +26,7 @@ public class payment_succesful extends AppCompatActivity {
         txtresult= findViewById(R.id.txtresult);
         txtamount= findViewById(R.id.txtamount);
         btnContinue= findViewById(R.id.btnContinue);
+
         Intent intent= getIntent();
         String result= intent.getStringExtra("result");
         String total= intent.getStringExtra("total");
@@ -37,5 +39,6 @@ public class payment_succesful extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
+
     }
 }

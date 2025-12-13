@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.myapplication.Admin.Custom_statistics_Fragment;
 import com.example.myapplication.Fragment.CategoryFragment;
+import com.example.myapplication.Fragment.Order_manager_Fragment;
 import com.example.myapplication.Fragment.Person_Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -50,8 +51,9 @@ public class AdminMain extends AppCompatActivity {
                 else if(id == R.id.user_statistics){
                     fragment = new Custom_statistics_Fragment();
 
-                }
-                else{
+                } else if (id== R.id.bill_manager) {
+                     fragment = new Order_manager_Fragment();
+                 } else{
 
                     fragment= new Person_Fragment();
                 }

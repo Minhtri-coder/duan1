@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:layout_height="wrap_content">
+
+        <!-- HÀNG TRÊN: Thông tin + Spinner + nút mở -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Thông tin hóa đơn bên trái -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtBillId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mã đơn: HD001"
+                    android:textStyle="bold"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/txtBillCustomer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Khách: Nguyễn Văn A"
+                    android:textSize="14sp"
+                    android:paddingTop="4dp"/>
+
+                <TextView
+                    android:id="@+id/txtBillDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ngày: 10/12/2025"
+                    android:textSize="14sp"
+                    android:paddingTop="2dp"/>
+
+                <TextView
+                    android:id="@+id/txtBillTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tổng: 350,000₫"
+                    android:textStyle="bold"
+                    android:textColor="#D88C43"
+                    android:textSize="15sp"
+                    android:paddingTop="6dp"/>
+            </LinearLayout>
+
+            <!-- Spinner trạng thái -->
+            <Spinner
+                android:id="@+id/spStatus"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:padding="4dp"
+                android:spinnerMode="dropdown"
+                android:background="@drawable/bg_spinner"
+                android:layout_marginRight="10dp"/>
+
+            <!-- Nút mở rộng chi tiết -->
+            <ImageView
+                android:id="@+id/btnToggleDetail"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_arrow_down"
+                android:padding="4dp"/>
+        </LinearLayout>
+
+        <!-- ====== PHẦN CHI TIẾT (ẨN) ====== -->
+        <LinearLayout
+            android:id="@+id/layoutDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:paddingTop="10dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chi tiet san pham "/>
+
+            <!-- nơi chứa các sản phẩm -->
+            <LinearLayout
+                android:id="@+id/containerProducts"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="6dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
