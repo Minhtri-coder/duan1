@@ -18,7 +18,7 @@
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/chair1"
+            android:src="@drawable/ic_logo"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="6dp"/>
 
@@ -99,7 +99,6 @@
             style="@style/Widget.MaterialComponents.Button"
             android:layout_marginTop="24dp"/>
 
-
         <TextView
             android:id="@+id/txtSignup"
             android:layout_width="match_parent"
@@ -108,9 +107,8 @@
             android:textSize="14sp"
             android:textColor="#777777"
             android:gravity="center"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="20dp"
-            />
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="20dp"/>
 
     </LinearLayout>
 
